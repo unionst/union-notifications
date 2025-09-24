@@ -1,0 +1,9 @@
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = ""%@" quiere enviarte notificaciones";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Las notificaciones pueden incluir alertas, sonidos e íconos de notificación. Puedes configurar estas opciones en Ajustes.";
+"Allow" = "Permitir";
+"Don't Allow" = "No permitir";
+
+/* Test View */
+"Notification Permission Dialog Test" = "Prueba de diálogo de permiso de notificación";
+"Show Notification Dialog" = "Mostrar diálogo de notificación";

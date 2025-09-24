@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "union-notifications",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v18)
     ],
@@ -21,6 +22,9 @@ let package = Package(
             name: "UnionNotifications",
             dependencies: [
                 .product(name: "UnionButtons", package: "union-buttons")
+            ],
+            resources: [
+                .process("Resources")
             ]
         )
     ]

@@ -1,0 +1,9 @@
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = "\"%@\" Would Like to Send You Notifications";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.";
+"Allow" = "Allow";
+"Don't Allow" = "Don't Allow";
+
+/* Test View */
+"Notification Permission Dialog Test" = "Notification Permission Dialog Test";
+"Show Notification Dialog" = "Show Notification Dialog";

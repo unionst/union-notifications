@@ -12,18 +12,22 @@ struct iOS26NotificationView: View {
     let appName: String
     let onAllow: () -> Void
     @Namespace private var glassNamespace
+    
+    private var localizedTitle: String {
+        String(format: String(localized: "\"%@\" Would Like to Send You Notifications", bundle: .module), appName)
+    }
 
     var body: some View {
         GlassEffectContainer(spacing: 0) {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 7) {
-                    Text("“\(appName)” Would Like to Send You Notifications")
+                    Text(LocalizedStringKey(localizedTitle))
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(.primary)
                         .lineLimit(2)
                         .lineSpacing(1.6)
 
-                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.")
+                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.secondary)
                         .lineLimit(3)
@@ -35,7 +39,7 @@ struct iOS26NotificationView: View {
                     Button {
                         // Don't Allow action - no-op
                     } label: {
-                        Text("Don’t Allow")
+                        Text("Don't Allow", bundle: .module)
                             .font(.body.weight(.medium))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity)
@@ -47,7 +51,7 @@ struct iOS26NotificationView: View {
                     Button {
                         onAllow()
                     } label: {
-                        Text("Allow")
+                        Text("Allow", bundle: .module)
                             .font(.body.weight(.semibold))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)

@@ -8,12 +8,14 @@ public struct NotificationTestView: View {
     public var body: some View {
         ZStack {
             VStack(spacing: 24) {
-                Text("Notification Permission Dialog Test")
+                Text("Notification Permission Dialog Test", bundle: .module)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                Button("Show Notification Dialog") {
+                Button(action: {
                     showingDialog = true
+                }) {
+                    Text("Show Notification Dialog", bundle: .module)
                 }
                 .buttonStyle(.borderedProminent)
                 

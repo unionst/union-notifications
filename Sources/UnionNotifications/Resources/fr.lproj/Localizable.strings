@@ -1,0 +1,11 @@
+/* Notification Permission Dialog */
+"notification.permission.title" = "PLACEHOLDER";
+"notification.permission.message" = "PLACEHOLDER";
+"notification.permission.allow" = "PLACEHOLDER";
+"notification.permission.dontAllow" = "PLACEHOLDER";
+"notification.permission.enable" = "PLACEHOLDER";
+"notification.permission.subtitle" = "PLACEHOLDER";
+
+/* Test View */
+"notification.test.title" = "PLACEHOLDER";
+"notification.test.button" = "PLACEHOLDER";
