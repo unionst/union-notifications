@@ -17,11 +17,14 @@ public struct NotificationsView: View {
     }
     
     public var body: some View {
-        if #available(iOS 26, *) {
-            iOS26NotificationView(appName: appName, onAllow: handleAllow)
-        } else {
-            iOS18NotificationView(appName: appName, onAllow: handleAllow)
+        Group {
+            if #available(iOS 26, *) {
+                iOS26NotificationView(appName: appName, onAllow: handleAllow)
+            } else {
+                iOS18NotificationView(appName: appName, onAllow: handleAllow)
+            }
         }
+        .centerInWindow()
     }
     
     private func handleAllow() {
