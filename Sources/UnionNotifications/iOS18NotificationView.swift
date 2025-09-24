@@ -46,17 +46,16 @@ struct iOS18NotificationView: View {
                         .frame(maxWidth: .infinity, minHeight: 44)
 
                     Divider()
-                        .frame(width: 1/3)
 
-                    Button(action: {
+                    Button {
                         onAllow()
-                    }) {
+                    } label: {
                         Text("Allow", bundle: .module)
                             .font(.system(size: 17, weight: .medium))
                             .foregroundStyle(Color.blue)
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
-                    .contentShape(Rectangle())
+                    .contentShape(.rect)
                     .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
                         label
                             .frame(maxWidth: .infinity, minHeight: 44)

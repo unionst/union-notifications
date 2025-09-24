@@ -1,15 +1,6 @@
 # UnionNotifications
 
-A SwiftUI library that provides system-style notification permission dialogs with modern iOS design patterns. Features adaptive layouts for iOS 18+ and iOS 26+ with Liquid Glass effects.
-
-## Features
-
-- 🎨 **Adaptive Design**: Automatically switches between iOS 18 and iOS 26+ styles
-- 🌍 **Internationalization**: Built-in support for 8 languages (English, Spanish, French, German, Japanese, Chinese, Portuguese, Italian)
-- ✨ **Modern APIs**: Uses iOS 17+ async/await and structured concurrency
-- 🧊 **Liquid Glass**: iOS 26+ version features Liquid Glass effects and glass buttons
-- 📱 **System-like**: Mimics native iOS notification permission dialogs
-- 🔧 **Customizable**: Optional action closures and permission handling
+A SwiftUI package that provides a customizable notification permission dialog that mimics the iOS system notification permission UI.
 
 ## Requirements
 
@@ -20,92 +11,66 @@ A SwiftUI library that provides system-style notification permission dialogs wit
 
 ### Swift Package Manager
 
-Add the package dependency to your Package.swift file:
-
 ```swift
 dependencies: [
-    .package(url: "https://github.com/unionst/union-buttons.git", from: "2.0.0")
+    .package(url: "https://github.com/unionst/union-notifications.git", from: "1.0.0")
 ]
 ```
-
-Or add it directly in Xcode using File > Add Packages...
 
 ## Usage
 
 ### Basic Usage
 
 ```swift
-import SwiftUI
 import UnionNotifications
 
+// Simple notification dialog
+NotificationsView()
+
+// With action callback
+NotificationsView {
+    // Called when user taps "Allow" and grants permission
+    print("Notifications enabled!")
+}
+```
+
+### Custom Implementation
+
+```swift
 struct ContentView: View {
-    @State private var showNotificationDialog = false
-    
     var body: some View {
-        Button("Request Notifications") {
-            showNotificationDialog = true
-        }
-        .sheet(isPresented: $showNotificationDialog) {
-            ZStack {
-                Color.black.opacity(0.3)
-                    .ignoresSafeArea()
-                
-                NotificationsView()
-            }
+        NotificationsView {
+            // Handle notification permission granted
         }
     }
 }
 ```
 
-### With Custom Action
+## Features
 
-```swift
-NotificationsView {
-    print("User granted notification permissions!")
-    // Handle permission granted
-}
-```
-
-### Testing
-
-Use the built-in test view to preview and test the notification dialog:
-
-```swift
-import UnionNotifications
-
-NotificationTestView()
-```
+- System-style notification permission dialog
+- Automatic app name detection from Bundle
+- Requests actual notification permissions when "Allow" is tapped
+- Localized for 8 languages
+- Adaptive design for iOS 18 and iOS 26+
 
 ## Localization
 
-The library automatically localizes text based on the user's device language. Supported languages:
+Supported languages:
+- English
+- Spanish (es)
+- French (fr)
+- German (de)
+- Japanese (ja)
+- Chinese Simplified (zh-Hans)
+- Portuguese Brazil (pt-BR)
+- Italian (it)
 
-- 🇺🇸 English
-- 🇪🇸 Spanish
-- 🇫🇷 French
-- 🇩🇪 German
-- 🇯🇵 Japanese
-- 🇨🇳 Chinese (Simplified)
-- 🇧🇷 Portuguese (Brazil)
-- 🇮🇹 Italian
+## iOS Version Support
 
-## iOS Version Differences
-
-### iOS 18-25
-- Classic material background
-- Traditional button styles with UnionButtonStyle press effects
-- Standard iOS notification dialog layout
-
-### iOS 26+
-- Liquid Glass effects with `GlassEffectContainer`
-- Glass button styles (`GlassButtonStyle`, `GlassProminentButtonStyle`)
-- Modern typography and spacing
-- Enhanced visual effects and animations
-
-## Dependencies
-
-- [UnionButtons](https://github.com/unionst/union-buttons) - Provides enhanced button styles and press effects
+- **iOS 18-25**: Classic iOS notification dialog style
+- **iOS 26+**: Modern design with Liquid Glass effects (when available)
 
 ## License
 
-This library is released under the MIT license. See LICENSE for details.
+MIT

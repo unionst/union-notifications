@@ -45,7 +45,7 @@ struct iOS26NotificationView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 34)
                     }
-                    .buttonStyle(GlassButtonStyle())
+                    .buttonStyle(.glass)
                     .disabled(true)
 
                     Button {
@@ -57,7 +57,7 @@ struct iOS26NotificationView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 34)
                     }
-                    .buttonStyle(GlassProminentButtonStyle())
+                    .buttonStyle(.glassProminent)
                 }
                 .padding(.horizontal, 16)
             }
