@@ -66,5 +66,11 @@ struct iOS26NotificationView: View {
 }
 
 #Preview {
-    SwiftUIView()
+    if #available(iOS 26, *) {
+        iOS26NotificationView(appName: "TestApp") {
+            print("Allow tapped")
+        }
+    } else {
+        // Fallback on earlier versions
+    }
 }

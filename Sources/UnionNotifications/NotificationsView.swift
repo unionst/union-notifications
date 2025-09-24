@@ -47,6 +47,29 @@ public struct NotificationsView: View {
     }
 }
 
+
+#Preview("iOS 18") {
+    ZStack {
+        Color.black.opacity(0.3)
+            .ignoresSafeArea()
+        
+        iOS18NotificationView(appName: "TestApp") {
+            print("iOS 18 Allow tapped")
+        }
+    }
+}
+
+#Preview("iOS 26") {
+    ZStack {
+        Color.black.opacity(0.3)
+            .ignoresSafeArea()
+        
+        NotificationsView {
+            print("iOS 26 Allow tapped")
+        }
+    }
+}
+
 #Preview {
     ZStack {
         Color.black.opacity(0.3)

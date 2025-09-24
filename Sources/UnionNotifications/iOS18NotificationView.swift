@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UnionButtons
 
 struct iOS18NotificationView: View {
     let appName: String
@@ -72,5 +73,7 @@ struct iOS18NotificationView: View {
 }
 
 #Preview {
-    iOS18NotificationView()
+    iOS18NotificationView(appName: "TestApp") {
+        print("Allow tapped")
+    }
 }
