@@ -3,7 +3,7 @@
 //  union-notifications
 //
 //  Created by Ben Sage on 9/23/25.
-//
+//  Last update Rafi Kigner 9/28/25
 
 import SwiftUI
 
@@ -22,15 +22,15 @@ struct iOS26NotificationView: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 7) {
                     Text(LocalizedStringKey(localizedTitle))
-                        .font(.system(size: 17, weight: .semibold))
+                        .font(.body.weight(.semibold))
                         .foregroundColor(.primary)
-                        .lineLimit(2)
+                        .lineLimit(nil)
                         .lineSpacing(1.6)
 
                     Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                        .font(.system(size: 15, weight: .regular))
+                        .font(.subheadline.weight(.regular))
                         .foregroundColor(.secondary)
-                        .lineLimit(3)
+                        .lineLimit(nil)
                         .lineSpacing(2.0)
                 }
                 .padding(.horizontal, 30)
@@ -42,8 +42,7 @@ struct iOS26NotificationView: View {
                         Text("Don't Allow", bundle: .module)
                             .font(.body.weight(.medium))
                             .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 34)
+                            .frame(maxWidth: .infinity, minHeight: 34)
                     }
                     .buttonStyle(.glass)
                     .disabled(true)
@@ -54,8 +53,7 @@ struct iOS26NotificationView: View {
                         Text("Allow", bundle: .module)
                             .font(.body.weight(.semibold))
                             .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 34)
+                            .frame(maxWidth: .infinity, minHeight: 34)
                     }
                     .buttonStyle(.glassProminent)
                 }

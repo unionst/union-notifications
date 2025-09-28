@@ -3,7 +3,7 @@
 //  union-notifications
 //
 //  Created by Ben Sage on 9/23/25.
-//
+//  Last Update Rafi Kigner 9/28/25
 
 import SwiftUI
 import UnionButtons
@@ -20,15 +20,14 @@ struct iOS18NotificationView: View {
         VStack(spacing: 0) {
             VStack(spacing: 4) {
                 Text(LocalizedStringKey(localizedTitle))
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.body.weight(.semibold))
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                    .font(.system(size: 13, weight: .regular))
-                    .lineSpacing(0.4)
+                    .font(.footnote.weight(.regular))
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -41,7 +40,7 @@ struct iOS18NotificationView: View {
 
                 HStack(spacing: 0) {
                     Text("Don't Allow", bundle: .module)
-                        .font(.system(size: 17, weight: .regular))
+                        .font(.body.weight(.semibold))
                         .foregroundStyle(Color.blue.opacity(0.3))
                         .frame(maxWidth: .infinity, minHeight: 44)
 
@@ -51,7 +50,7 @@ struct iOS18NotificationView: View {
                         onAllow()
                     } label: {
                         Text("Allow", bundle: .module)
-                            .font(.system(size: 17, weight: .medium))
+                            .font(.body.weight(.semibold))
                             .foregroundStyle(Color.blue)
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
