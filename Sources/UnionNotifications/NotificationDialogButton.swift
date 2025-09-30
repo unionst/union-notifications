@@ -22,7 +22,7 @@ struct NotificationDialogButton: View {
         .contentShape(.rect)
         .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
             label
-                .frame(maxWidth: .infinity)  // No height here either
+                .frame(maxWidth: .infinity)
                 .background(
                     Rectangle()
                         .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
