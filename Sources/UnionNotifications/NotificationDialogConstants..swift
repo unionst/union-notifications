@@ -2,13 +2,12 @@
 //  NotificationDialogConstants.swift
 //  union-notifications
 //
-//  Created by RJ Kigner on 9/29/25.
+//  Created by Rafi Kigner on 9/29/25.
 //
 
 import SwiftUI
 
 enum NotificationDialogConstants {
-    // MARK: button Heights by Dynamic Type Size
     static func buttonHeight(for size: DynamicTypeSize) -> CGFloat {
         switch size {
         case .xSmall, .small, .medium, .large, .xLarge:
@@ -26,13 +25,12 @@ enum NotificationDialogConstants {
         case .accessibility4:
             return 100
         case .accessibility5:
-            return 133 //proof if you get really specfic it'll work exactly...in some contexts
+            return 133
         @unknown default:
             return 44
         }
     }
     
-    // MARK: width Percentages
     enum WidthPercentage {
         static func forIPad(_ size: DynamicTypeSize) -> CGFloat {
             switch size {
@@ -54,7 +52,6 @@ enum NotificationDialogConstants {
         }
         
         static func forLandscape(_ size: DynamicTypeSize) -> CGFloat {
-            //same logic as the iPad
             forIPad(size)
         }
         

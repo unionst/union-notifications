@@ -2,8 +2,8 @@
 //  NotificationDialogButton.swift
 //  union-notifications
 //
-//  Created by RJ Kigner on 9/29/25.
-//
+//  Created by Rafi Kigner on 9/29/25.
+//  Last edited by Rafi Kigner on 9/30/25
 
 import SwiftUI
 import UnionButtons

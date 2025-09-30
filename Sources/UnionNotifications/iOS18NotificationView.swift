@@ -2,21 +2,32 @@
 //  union-notifications
 //
 //  Created by Ben Sage on 9/23/25.
-//  Last Update Rafi Kigner 9/29/25
+//  Last Update Rafi Kigner 9/30/25
 
 import SwiftUI
 import UnionButtons
 
 
 struct iOS18NotificationView: View {
-    // MARK: properties
+
     let appName: String
     let onAllow: () -> Void
+    let onDontAllow: (() -> Void)? 
     
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
-    // MARK: computed Properties
+    init(
+           appName: String,
+           onAllow: @escaping () -> Void,
+           onDontAllow: (() -> Void)? = nil
+       ) {
+           self.appName = appName
+           self.onAllow = onAllow
+           self.onDontAllow = onDontAllow
+       }
+    
+
     private var shouldStackButtons: Bool {
         dynamicTypeSize > .xxLarge
     }
@@ -29,7 +40,6 @@ struct iOS18NotificationView: View {
         NotificationDialogConstants.buttonHeight(for: dynamicTypeSize)
     }
     
-    // MARK: Layout Calculations
     private func dialogWidth(proxy: GeometryProxy) -> CGFloat {
         let screenWidth = proxy.size.width
         let screenHeight = proxy.size.height
@@ -51,11 +61,11 @@ struct iOS18NotificationView: View {
         return min(calculatedWidth, NotificationDialogConstants.maxDialogWidth)
     }
 
-    // MARK: Body
+
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                NotificationDialogContent(
+                IOS18NotificationDialogContent(
                     appName: appName,
                     shouldEnableScroll: shouldEnableScroll,
                     maxContentHeight: NotificationDialogConstants.maxScrollHeight
@@ -99,7 +109,9 @@ struct iOS18NotificationView: View {
     }
     
     private var disabledButton: some View {
-        Button(action: { }) {
+        Button(action: {
+                onDontAllow?()  
+            }) {
             Text("Don't Allow", bundle: .module)
                 .font(.body.weight(.semibold))
                 .foregroundStyle(Color.blue.opacity(0.3))
@@ -107,6 +119,7 @@ struct iOS18NotificationView: View {
         .frame(maxWidth: .infinity, minHeight: buttonHeight)  
         .contentShape(.rect)
         .buttonStyle(.plain)
+        .disabled(onDontAllow == nil)
     }
     
     private var activeButton: some View {
@@ -121,4 +134,11 @@ struct iOS18NotificationView: View {
     iOS18NotificationView(appName: "TestApp") {
         print("Allow tapped")
     }
+}
+#Preview {
+    iOS18NotificationView(
+        appName: "TestApp",
+        onAllow: { print("Allow") },
+        onDontAllow: { print("Don't Allow") }
+    )
 }

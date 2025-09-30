@@ -1,69 +1,139 @@
-//
-//  SwiftUIView.swift
+//  iOS26NotificationView.swift
 //  union-notifications
 //
 //  Created by Ben Sage on 9/23/25.
-//  Last update Rafi Kigner 9/28/25
+//  Last update Rafi Kigner 9/30/25
+//
+//
+
 
 import SwiftUI
 
 @available(iOS 26, *)
 struct iOS26NotificationView: View {
+
     let appName: String
     let onAllow: () -> Void
+    
     @Namespace private var glassNamespace
     
-    private var localizedTitle: String {
-        String(format: String(localized: "\"%@\" Would Like to Send You Notifications", bundle: .module), appName)
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
+
+    private var shouldStackButtons: Bool {
+        dynamicTypeSize > .xxLarge
+    }
+    
+    private var shouldEnableScroll: Bool {
+        dynamicTypeSize >= .accessibility2
+    }
+    
+    private var buttonHeight: CGFloat {
+        NotificationDialogConstants.buttonHeight(for: dynamicTypeSize)
+    }
+    
+    private func dialogWidth(proxy: GeometryProxy) -> CGFloat {
+        let screenWidth = proxy.size.width
+        let screenHeight = proxy.size.height
+        
+        let isLandscape = screenWidth > screenHeight
+        let isIPad = horizontalSizeClass == .regular &&
+                     screenWidth > NotificationDialogConstants.iPadWidthThreshold
+        
+        let percentage: CGFloat
+        if isIPad {
+            percentage = NotificationDialogConstants.WidthPercentage.forIPad(dynamicTypeSize)
+        } else if isLandscape {
+            percentage = NotificationDialogConstants.WidthPercentage.forLandscape(dynamicTypeSize)
+        } else {
+            percentage = NotificationDialogConstants.WidthPercentage.forPortrait(dynamicTypeSize)
+        }
+        
+        let calculatedWidth = screenWidth * percentage
+        
+        if(dynamicTypeSize < .accessibility3){
+            return min(calculatedWidth, NotificationDialogConstants.maxDialogWidth)
+        }else{
+            return max(calculatedWidth, NotificationDialogConstants.maxDialogWidth * 0.75)
+        }
     }
 
     var body: some View {
-        GlassEffectContainer(spacing: 0) {
-            VStack(alignment: .leading, spacing: 20) {
-                VStack(alignment: .leading, spacing: 7) {
-                    Text(LocalizedStringKey(localizedTitle))
-                        .font(.body.weight(.semibold))
-                        .foregroundColor(.primary)
-                        .lineLimit(nil)
-                        .lineSpacing(1.6)
-
-                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                        .font(.subheadline.weight(.regular))
-                        .foregroundColor(.secondary)
-                        .lineLimit(nil)
-                        .lineSpacing(2.0)
+        GeometryReader { geometry in
+            GlassEffectContainer(spacing: 0) {
+                VStack(spacing: 0) {
+                    iOS26NotificationContent(
+                        appName: appName,
+                        shouldEnableScroll: shouldEnableScroll,
+                        maxContentHeight: NotificationDialogConstants.maxScrollHeight
+                    )
+                    
+                    buttonSection
                 }
-                .padding(.horizontal, 30)
-
-                HStack(spacing: 8) {
-                    Button {
-                        // Don't Allow action - no-op
-                    } label: {
-                        Text("Don't Allow", bundle: .module)
-                            .font(.body.weight(.medium))
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, minHeight: 34)
-                    }
-                    .buttonStyle(.glass)
-                    .disabled(true)
-
-                    Button {
-                        onAllow()
-                    } label: {
-                        Text("Allow", bundle: .module)
-                            .font(.body.weight(.semibold))
-                            .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity, minHeight: 34)
-                    }
-                    .buttonStyle(.glassProminent)
-                }
-                .padding(.horizontal, 16)
             }
-            .padding(.top, 22)
-            .padding(.bottom, 16)
+            .frame(width: dialogWidth(proxy: geometry))
+            .glassEffect(.regular, in: .rect(cornerRadius: 32))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(width: 320)
-        .glassEffect(.regular, in: .rect(cornerRadius: 32))
+    }
+    
+    private var buttonSection: some View {
+        Group {
+            if shouldStackButtons {
+                verticalButtons
+            } else {
+                horizontalButtons
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
+    }
+    
+    private var verticalButtons: some View {
+        VStack(spacing: 8) {
+            disabledButton
+            activeButton
+        }
+    }
+    
+    private var horizontalButtons: some View {
+        HStack(spacing: 8) {
+            disabledButton
+            activeButton
+        }
+    }
+    
+    @Environment(\.colorScheme) private var colorScheme
+    
+    private var disabledButton: some View {
+        Button(action: { }) {
+            Text("Don't Allow", bundle: .module)
+                .font(.body.weight(.medium))
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, minHeight: buttonHeight)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 30)
+                .fill(Color.gray.opacity(0.15))
+        )
+        .glassEffect(.clear, in: .rect(cornerRadius: 30))
+        .disabled(true)
+    }
+    
+
+    private var activeButton: some View {
+        Button(action: onAllow) {
+            Text("Allow", bundle: .module)
+                .font(.body.weight(.semibold))
+                .foregroundStyle(colorScheme == .dark ? .white : .black)
+                .frame(maxWidth: .infinity, minHeight: buttonHeight)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 30)
+                .fill(Color.gray.opacity(0.15))
+        )
+        .glassEffect(.clear, in: .rect(cornerRadius: 30))
     }
 }
 
@@ -72,7 +142,5 @@ struct iOS26NotificationView: View {
         iOS26NotificationView(appName: "TestApp") {
             print("Allow tapped")
         }
-    } else {
-        // Fallback on earlier versions
     }
 }
