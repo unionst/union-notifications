@@ -113,10 +113,7 @@ struct iOS26NotificationView: View {
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, minHeight: buttonHeight)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color.gray.opacity(0.15))
-        )
+        .background(.gray.opacity(0.15), in: .rect(cornerRadius: 30, style: .continuous))
         .glassEffect(.clear, in: .rect(cornerRadius: 30))
         .disabled(true)
     }
@@ -129,10 +126,7 @@ struct iOS26NotificationView: View {
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
                 .frame(maxWidth: .infinity, minHeight: buttonHeight)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color.gray.opacity(0.15))
-        )
+        .background(.gray.opacity(0.15), in: .rect(cornerRadius: 30, style: .continuous))
         .glassEffect(.clear, in: .rect(cornerRadius: 30))
     }
 }
