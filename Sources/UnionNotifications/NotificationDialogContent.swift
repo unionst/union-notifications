@@ -14,7 +14,7 @@ struct NotificationDialogContent: View {
     let maxContentHeight: CGFloat?
     
     private var localizedTitle: String {
-        String(format: String(localized: "\"%@\" Would Like to Send You Notifications", bundle: .module), appName)
+        String(format: String(localized: "\"%@\" Would Like to Send You Notifications", bundle: .module), appName) 
     }
     
     var body: some View {

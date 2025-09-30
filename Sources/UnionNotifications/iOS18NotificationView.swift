@@ -30,7 +30,10 @@ struct iOS18NotificationView: View {
     }
     
     // MARK: Layout Calculations
-    private func dialogWidth(screenWidth: CGFloat, screenHeight: CGFloat) -> CGFloat {
+    private func dialogWidth(proxy: GeometryProxy) -> CGFloat {
+        let screenWidth = proxy.size.width
+        let screenHeight = proxy.size.height
+        
         let isLandscape = screenWidth > screenHeight
         let isIPad = horizontalSizeClass == .regular &&
                      screenWidth > NotificationDialogConstants.iPadWidthThreshold
@@ -52,30 +55,20 @@ struct iOS18NotificationView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                // Content area
                 NotificationDialogContent(
                     appName: appName,
                     shouldEnableScroll: shouldEnableScroll,
                     maxContentHeight: NotificationDialogConstants.maxScrollHeight
                 )
-                
-                // Button area
                 buttonSection
             }
-            .background {
-                Rectangle()
-                    .fill(.regularMaterial)
-            }
-            .frame(width: dialogWidth(
-                screenWidth: geometry.size.width,
-                screenHeight: geometry.size.height
-            ))
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .background(.regularMaterial)
+            .frame(width: dialogWidth(proxy: geometry))
+            .clipShape(.rect(cornerRadius: 16, style: .continuous))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
-    // MARK: Button Section!
     private var buttonSection: some View {
         VStack(spacing: 0) {
             Divider()
@@ -106,19 +99,21 @@ struct iOS18NotificationView: View {
     }
     
     private var disabledButton: some View {
-        Text("Don't Allow", bundle: .module)
-            .font(.body.weight(.semibold))
-            .foregroundStyle(Color.blue.opacity(0.3))
-            .frame(maxWidth: .infinity, minHeight: buttonHeight)
+        Button(action: { }) {
+            Text("Don't Allow", bundle: .module)
+                .font(.body.weight(.semibold))
+                .foregroundStyle(Color.blue.opacity(0.3))
+        }
+        .frame(maxWidth: .infinity, minHeight: buttonHeight)  
+        .contentShape(.rect)
+        .buttonStyle(.plain)
     }
     
     private var activeButton: some View {
         NotificationDialogButton(
             title: "Allow",
-            isEnabled: true,
-            height: buttonHeight,
             action: onAllow
-        )
+        ).frame(minHeight: buttonHeight)
     }
 }
 
