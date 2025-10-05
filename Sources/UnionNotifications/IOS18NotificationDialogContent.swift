@@ -1,5 +1,5 @@
 //
-//  IOS18NotificationDialogContent.swift
+//  iOS18NotificationDialogContent.swift
 //  union-notifications
 //
 //  Created by RJ Kigner on 9/29/25.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct  IOS18NotificationDialogContent: View {
+struct  iOS18NotificationDialogContent: View {
     let appName: String
     let shouldEnableScroll: Bool
     let maxContentHeight: CGFloat?
@@ -50,3 +50,6 @@ struct  IOS18NotificationDialogContent: View {
         .padding(.horizontal, 16)
     }
 }
+
+
+

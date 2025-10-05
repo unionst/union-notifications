@@ -65,7 +65,7 @@ struct iOS18NotificationView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                IOS18NotificationDialogContent(
+                iOS18NotificationDialogContent(
                     appName: appName,
                     shouldEnableScroll: shouldEnableScroll,
                     maxContentHeight: NotificationDialogConstants.maxScrollHeight
@@ -119,7 +119,7 @@ struct iOS18NotificationView: View {
         .frame(maxWidth: .infinity, minHeight: buttonHeight)  
         .contentShape(.rect)
         .buttonStyle(.plain)
-        .disabled(onDontAllow == nil)
+//        .disabled(onDontAllow == nil)
     }
     
     private var activeButton: some View {

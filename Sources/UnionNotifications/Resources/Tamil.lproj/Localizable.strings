@@ -1,0 +1,6 @@
+
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = ""%@" உங்களுக்கு அறிவிப்புகள் அனுப்ப விரும்புகிறது";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "அறிவிப்புகளில் விழிப்புட்டல்களும், ஒலிகளும், ஐகான் பேட்ஜ்களும் உள்ளடங்கும். இதை அமைப்புகளில் உள்ளமைக்கலாம்.";
+"Allow" = "அனுமதி";
+"Don't Allow" = "அனுமதிக்காதே";

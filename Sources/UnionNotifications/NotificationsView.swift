@@ -5,23 +5,26 @@ import UnionButtons
 public struct NotificationsView: View {
     private let appName: String
     private let action: () -> Void
+    private let onDontAllow: (() -> Void)?
     private let requestSystemPermission: Bool
     
     public init(
         requestSystemPermission: Bool = true,
-        action: @escaping () -> Void = {}
+        action: @escaping () -> Void = {},
+        onDontAllow: (() -> Void)? = nil
     ) {
         self.appName = Bundle.main.displayName ?? "App"
         self.requestSystemPermission = requestSystemPermission
         self.action = action
+        self.onDontAllow = onDontAllow
     }
     
     public var body: some View {
         Group {
             if #available(iOS 26, *) {
-                iOS26NotificationView(appName: appName, onAllow: handleAllow)
+                iOS26NotificationView(appName: appName, onAllow: handleAllow) //REMINDER TO ADD LAST PARAMETER FOR IOS26
             } else {
-                iOS18NotificationView(appName: appName, onAllow: handleAllow)
+                iOS18NotificationView(appName: appName, onAllow: handleAllow, onDontAllow: onDontAllow)
             }
         }
         .centerInWindow()
