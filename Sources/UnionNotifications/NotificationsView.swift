@@ -22,7 +22,7 @@ public struct NotificationsView: View {
     public var body: some View {
         Group {
             if #available(iOS 26, *) {
-                iOS26NotificationView(appName: appName, onAllow: handleAllow) //REMINDER TO ADD LAST PARAMETER FOR IOS26
+                iOS26NotificationView2(appName: appName, onAllow: handleAllow) //REMINDER TO ADD LAST PARAMETER FOR IOS26
             } else {
                 iOS18NotificationView(appName: appName, onAllow: handleAllow, onDontAllow: onDontAllow)
             }
