@@ -39,7 +39,7 @@ struct sizeXXL: NotificationSizes {
     var cornerRadius: CGFloat = 32.0
     var titleLeading: CGFloat = 0
     var bodyLeading: CGFloat = 0
-    var titleToBodyDistance: CGFloat = 30      // Distance from title BOTTOM to body TOP
+    var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
     var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
     var horizontalTextPadding: CGFloat = 30
 }

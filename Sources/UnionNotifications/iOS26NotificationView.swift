@@ -3,8 +3,8 @@
 //
 //  Created by Ben Sage on 9/23/25.
 //  Last update Rafi Kigner 10/05/25
-
-
+//
+//
 
 import SwiftUI
 
@@ -369,18 +369,18 @@ struct iOS26NotificationView: View {
     }
 }
 
-#Preview {
-    if #available(iOS 26, *) {
-        iOS26NotificationView(
-            appName: "TestApp",
-            onAllow: {
-                print("Allow button tapped")
-            },
-            onDontAllow: {
-                print("Don't Allow button tapped")
-            }
-        )
-    }
-}
+//#Preview {
+//    if #available(iOS 26, *) {
+//        iOS26NotificationView(
+//            appName: "TestApp",
+//            onAllow: {
+//                print("Allow button tapped")
+//            },
+//            onDontAllow: {
+//                print("Don't Allow button tapped")
+//            }
+//        )
+//    }
+//}
 
 
