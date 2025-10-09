@@ -17,16 +17,17 @@ struct iOS26NotificationViewScrollable: View {
     let sizes: any NotificationSizes
     let appName: String
     let onAllow: () -> Void
+    
+    
+    
     let onDontAllow: (() -> Void)?
     
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     
     
     var body: some View {
-        var textH = (sizes.dialogHeight - sizes.buttonDialogHeight)
+        let textH: CGFloat = (sizes.dialogHeight - sizes.buttonDialogHeight)
         VStack(spacing: 0) {
-            
-        
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 0) {
                     Spacer()
@@ -88,7 +89,10 @@ struct iOS26NotificationViewScrollable: View {
             }
             
         }
-        .frame(width: sizes.dialogWidth, height: textH)
+        .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
+
+             
+               
       
     }
     

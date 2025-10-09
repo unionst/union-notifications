@@ -1,4 +1,4 @@
-//
+////
 //  iOS26NotificationsView.swift
 //  union-notifications
 //
@@ -135,8 +135,6 @@ struct iOS26NotificationView: View {
         .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
         .clipped()
         .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
-//        .ios26Glass(cornerRadius: sizes.cornerRadius, material: .thinMaterial)  // or .regularMaterial
-        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
         .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
         .transition(.scale.combined(with: .opacity))
     }
@@ -192,7 +190,7 @@ struct iOS26NotificationView: View {
                 .foregroundStyle(.gray.opacity(0.50))
                 .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)
         }
-        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
+//        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
         .buttonStyle(.glass)
  
     }
@@ -206,7 +204,6 @@ struct iOS26NotificationView: View {
                 .foregroundStyle(.black)
                 .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)
         }
-        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
         .transition(.scale.combined(with: .opacity))
         .buttonStyle(.glass(.regular))
         .glassEffect(.regular.tint(.gray.opacity(0.05)))

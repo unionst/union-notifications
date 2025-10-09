@@ -151,183 +151,183 @@ struct sizeXL: NotificationSizes { //CURRENT
 }
 
     
+
+
+
+struct sizeXXL: NotificationSizes {
+    var dialogHeight: CGFloat = 356.66
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 320.0
+    var buttonHeight: CGFloat = 33.3
+    var buttonWidth: CGFloat = 115.0
+    var buttonDistanceFromBottom: CGFloat = 103 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 100     // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = -35     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 30
+    var rightTitlePadding: CGFloat = 0
+    var buttonsHorizontal: Bool = true
+    var buttonDialogHeight: CGFloat = 0
+}
+
+struct sizeXXXL: NotificationSizes {
+    var dialogHeight: CGFloat = 445
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 320
+    var buttonHeight: CGFloat = 45
+    var buttonWidth: CGFloat = 275.0
+    var buttonDistanceFromBottom: CGFloat = 15 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 40   // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = 20     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 28
+    var rightTitlePadding: CGFloat = 0
+    var buttonsHorizontal: Bool = false //shouldnt this be true
+    var buttonDialogHeight: CGFloat = 130
     
+}
+
+struct sizeXXXLH: NotificationSizes {
+    var dialogHeight: CGFloat = 367.666667
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 315.0
+    var buttonHeight: CGFloat = 45
+    var buttonWidth: CGFloat = 280.0
+    var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 22    // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = 10     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 22
+    var rightTitlePadding: CGFloat = 0
+    //.padding(.trailing, sizes.rightTitlePadding)
+    var buttonsHorizontal: Bool = false
+    var buttonDialogHeight: CGFloat = 93
+}
+
+struct sizeA1: NotificationSizes {
+    var dialogHeight: CGFloat = 588.0
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 360.0
+    var buttonHeight: CGFloat = 72
+    var buttonWidth: CGFloat = 330.0
+    var buttonDistanceFromBottom: CGFloat = 15 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 60     // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = 50     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 30
+    var rightTitlePadding: CGFloat = 0
+    var buttonsHorizontal: Bool = false //shouldnt this be true
+    var buttonDialogHeight: CGFloat = 175
     
-    
-    struct sizeXXL: NotificationSizes {
-        var dialogHeight: CGFloat = 356.66
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 320.0
-        var buttonHeight: CGFloat = 33.3
-        var buttonWidth: CGFloat = 115.0
-        var buttonDistanceFromBottom: CGFloat = 103 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 100     // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = -35     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 30
-        var rightTitlePadding: CGFloat = 0
-        var buttonsHorizontal: Bool = true
-        var buttonDialogHeight: CGFloat = 0
-    }
-    
-    struct sizeXXXL: NotificationSizes { 
-        var dialogHeight: CGFloat = 445
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 320
-        var buttonHeight: CGFloat = 45
-        var buttonWidth: CGFloat = 275.0
-        var buttonDistanceFromBottom: CGFloat = 15 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 40   // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = 20     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 28
-        var rightTitlePadding: CGFloat = 0
-        var buttonsHorizontal: Bool = false //shouldnt this be true
-        var buttonDialogHeight: CGFloat = 130
+}
+
+
+
+
+
+struct sizeA1H: NotificationSizes { //curr
+    var dialogHeight: CGFloat = 367.666667
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 367.666667
+    var buttonHeight: CGFloat = 82
+    var buttonWidth: CGFloat = 333.0
+    var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 22    // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = 10     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 22
+    var rightTitlePadding: CGFloat = 0
+    //.padding(.trailing, sizes.rightTitlePadding)
+    var buttonsHorizontal: Bool = false
+    var buttonDialogHeight: CGFloat = 367.666667/2
+}
+
+
+struct sizeA2: NotificationSizes { //curr
+    var dialogHeight: CGFloat = 726.66667
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 367.666667
+    var buttonHeight: CGFloat = 90
+    var buttonWidth: CGFloat = 330.0
+    var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 70     // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = 35     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 30
+    var rightTitlePadding: CGFloat = 0
+    //.padding(.trailing, sizes.rightTitlePadding)
+    var buttonsHorizontal: Bool = false
+    var buttonDialogHeight: CGFloat = 230 //false
         
-    }
-    
-    struct sizeXXXLH: NotificationSizes {
-        var dialogHeight: CGFloat = 367.666667
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 315.0
-        var buttonHeight: CGFloat = 45
-        var buttonWidth: CGFloat = 280.0
-        var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 22    // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = 10     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 22
-        var rightTitlePadding: CGFloat = 0
-        //.padding(.trailing, sizes.rightTitlePadding)
-        var buttonsHorizontal: Bool = false
-        var buttonDialogHeight: CGFloat = 93
-    }
-    
-    struct sizeA1: NotificationSizes {
-        var dialogHeight: CGFloat = 588.0
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 360.0
-        var buttonHeight: CGFloat = 72
-        var buttonWidth: CGFloat = 330.0
-        var buttonDistanceFromBottom: CGFloat = 15 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 60     // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = 50     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 30
-        var rightTitlePadding: CGFloat = 0
-        var buttonsHorizontal: Bool = false //shouldnt this be true
-        var buttonDialogHeight: CGFloat = 175
         
-    }
-    
-    
-    
-    
-    
-    struct sizeA1H: NotificationSizes { //curr
-        var dialogHeight: CGFloat = 367.666667
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 367.666667
-        var buttonHeight: CGFloat = 82
-        var buttonWidth: CGFloat = 333.0
-        var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 22    // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = 10     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 22
-        var rightTitlePadding: CGFloat = 0
-        //.padding(.trailing, sizes.rightTitlePadding)
-        var buttonsHorizontal: Bool = false
-        var buttonDialogHeight: CGFloat = 367.666667/2
-    }
-    
-    
-    struct sizeA2: NotificationSizes { //curr
-        var dialogHeight: CGFloat = 726.66667
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 367.666667
-        var buttonHeight: CGFloat = 90
-        var buttonWidth: CGFloat = 330.0
-        var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 70     // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = 35     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 30
-        var rightTitlePadding: CGFloat = 0
-        //.padding(.trailing, sizes.rightTitlePadding)
-        var buttonsHorizontal: Bool = false
-        var buttonDialogHeight: CGFloat = 230 //false
+}
+
+struct sizeA2H: NotificationSizes { //curr
+    var dialogHeight: CGFloat = 367.666667
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .subheadline.weight(.regular)
+    var buttonFont: Font = .subheadline.weight(.medium)
+    var dialogWidth: CGFloat = 367.666667
+    var buttonHeight: CGFloat = 82
+    var buttonWidth: CGFloat = 333.0
+    var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
+    var buttonSeparationDistance: CGFloat = 8.0
+    var cornerRadius: CGFloat = 32.0
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
+    //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
+    var titleDistanceFromBottom: CGFloat = 15    // Distance from title BOTTOM to body TOP
+    var bodyTextDistanceFromBottom: CGFloat = 10     // Distance from title BOTTOM to body TOP
+    var horizontalTextPadding: CGFloat = 36
+    var rightTitlePadding: CGFloat = 0
+    //.padding(.trailing, sizes.rightTitlePadding)
+    var buttonsHorizontal: Bool = false
+    var buttonDialogHeight: CGFloat = 367.666667/2
         
-        
-    }
-    
-    struct sizeA2H: NotificationSizes { //curr
-        var dialogHeight: CGFloat = 367.666667
-        var titleFont: Font = .body.weight(.semibold)
-        var bodyFont: Font = .subheadline.weight(.regular)
-        var buttonFont: Font = .subheadline.weight(.medium)
-        var dialogWidth: CGFloat = 367.666667
-        var buttonHeight: CGFloat = 82
-        var buttonWidth: CGFloat = 333.0
-        var buttonDistanceFromBottom: CGFloat = 10 // want it distance from red line to green line - 15
-        var buttonSeparationDistance: CGFloat = 8.0
-        var cornerRadius: CGFloat = 32.0
-        var titleLeading: CGFloat = 0
-        var bodyLeading: CGFloat = 0
-        // var titleToBodyDistance: CGFloat = 20      // Distance from title BOTTOM to body TOP
-        //var bodyTextToButtonDistance: CGFloat = 20 // Distance from body BOTTOM to button TOP
-        var titleDistanceFromBottom: CGFloat = 15    // Distance from title BOTTOM to body TOP
-        var bodyTextDistanceFromBottom: CGFloat = 10     // Distance from title BOTTOM to body TOP
-        var horizontalTextPadding: CGFloat = 36
-        var rightTitlePadding: CGFloat = 0
-        //.padding(.trailing, sizes.rightTitlePadding)
-        var buttonsHorizontal: Bool = false
-        var buttonDialogHeight: CGFloat = 367.666667/2
-        
-    }
+}
 
 struct sizeA3: NotificationSizes { //curr
     var dialogHeight: CGFloat = 727.6667
@@ -351,10 +351,10 @@ struct sizeA3: NotificationSizes { //curr
     //.padding(.trailing, sizes.rightTitlePadding)
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 260
-    
+
 }
 
-struct sizeA3H: NotificationSizes { //curr
+    struct sizeA3H: NotificationSizes { //curr
     var dialogHeight: CGFloat = 367.666667
     var titleFont: Font = .body.weight(.semibold)
     var bodyFont: Font = .subheadline.weight(.regular)
@@ -376,8 +376,8 @@ struct sizeA3H: NotificationSizes { //curr
     //.padding(.trailing, sizes.rightTitlePadding)
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 367.666667/2
-    
-}
+
+    }
 
 
 struct sizeA4: NotificationSizes { //curr
@@ -402,7 +402,7 @@ struct sizeA4: NotificationSizes { //curr
     //.padding(.trailing, sizes.rightTitlePadding)
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 300
-    
+
 }
 
 struct sizeA4H: NotificationSizes { //curr
@@ -427,7 +427,7 @@ struct sizeA4H: NotificationSizes { //curr
     //.padding(.trailing, sizes.rightTitlePadding)
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 190.0
-    
+
 }
 
 struct sizeA5: NotificationSizes { //curr
@@ -452,7 +452,7 @@ struct sizeA5: NotificationSizes { //curr
     //.padding(.trailing, sizes.rightTitlePadding)
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 330.0
-    
+
 }
 
 struct sizeA5H: NotificationSizes { //curr
@@ -477,11 +477,10 @@ struct sizeA5H: NotificationSizes { //curr
     //.padding(.trailing, sizes.rightTitlePadding)
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 185.0
-    
 }
-    
-    
-    
+
+
+
 
 
 

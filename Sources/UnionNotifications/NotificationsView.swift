@@ -67,17 +67,82 @@ public struct NotificationsView: View {
     }
 }
 
-#Preview("iOS 26") {
+#Preview("iOS 26 - Glass Test") {
     ZStack {
-        Color.black.opacity(0.3)
-            .ignoresSafeArea()
+        // Colorful gradient background to test glass blur
+        LinearGradient(
+            colors: [.blue, .purple, .pink, .orange],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
         
-        NotificationsView {
-            print("iOS 26 Allow tapped")
+        // Some text behind to see if it blurs through
+        VStack(spacing: 20) {
+            Text("BACKGROUND TEXT")
+                .font(.system(size: 60, weight: .black))
+                .foregroundColor(.white)
+            
+            Text("You should see this blurred through the dialog")
+                .font(.title)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding()
+        }
+        
+        // Your dialog
+        if #available(iOS 26, *) {
+            iOS26NotificationView(
+                appName: "TestApp",
+                onAllow: {
+                    print("Allow tapped")
+                },
+                onDontAllow: {
+                    print("Don't Allow tapped")
+                }
+            )
+        } else {
+            // Fallback on earlier versions
         }
     }
 }
 
+#Preview("iOS 26 - Photo Background") {
+    ZStack {
+        // Simulated home screen with colorful icons
+        Color.blue.opacity(0.3)
+            .ignoresSafeArea()
+        
+        VStack(spacing: 40) {
+            HStack(spacing: 40) {
+                Circle().fill(.red).frame(width: 60, height: 60)
+                Circle().fill(.green).frame(width: 60, height: 60)
+                Circle().fill(.blue).frame(width: 60, height: 60)
+            }
+            HStack(spacing: 40) {
+                Circle().fill(.orange).frame(width: 60, height: 60)
+                Circle().fill(.purple).frame(width: 60, height: 60)
+                Circle().fill(.pink).frame(width: 60, height: 60)
+            }
+        }
+        .offset(y: -200)
+        
+        // Your dialog
+        if #available(iOS 26, *) {
+            iOS26NotificationView(
+                appName: "TestApp",
+                onAllow: {
+                    print("Allow tapped")
+                },
+                onDontAllow: {
+                    print("Don't Allow tapped")
+                }
+            )
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+}
 #Preview {
     ZStack {
         Color.black.opacity(0.3)
