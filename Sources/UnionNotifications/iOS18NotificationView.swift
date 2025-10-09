@@ -8,137 +8,187 @@ import SwiftUI
 import UnionButtons
 
 
-struct iOS18NotificationView: View {
+@available(iOS 18, *)
 
+struct iOS18NotificationView: View {
     let appName: String
     let onAllow: () -> Void
-    let onDontAllow: (() -> Void)? 
+    let onDontAllow: (() -> Void)?
+    
+    init(appName: String, onAllow: @escaping () -> Void, onDontAllow: (() -> Void)? = nil) {
+        self.appName = appName
+        self.onAllow = onAllow
+        self.onDontAllow = onDontAllow
+    }
     
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     
-    init(
-           appName: String,
-           onAllow: @escaping () -> Void,
-           onDontAllow: (() -> Void)? = nil
-       ) {
-           self.appName = appName
-           self.onAllow = onAllow
-           self.onDontAllow = onDontAllow
-       }
-    
-
-    private var shouldStackButtons: Bool {
-        dynamicTypeSize > .xxLarge
+    var isLandscape: Bool {
+        verticalSizeClass == .compact
     }
     
-    private var shouldEnableScroll: Bool {
-        dynamicTypeSize >= .accessibility2
-    }
-    
-    private var buttonHeight: CGFloat {
-        NotificationDialogConstants.buttonHeight(for: dynamicTypeSize)
-    }
-    
-    private func dialogWidth(proxy: GeometryProxy) -> CGFloat {
-        let screenWidth = proxy.size.width
-        let screenHeight = proxy.size.height
-        
-        let isLandscape = screenWidth > screenHeight
-        let isIPad = horizontalSizeClass == .regular &&
-                     screenWidth > NotificationDialogConstants.iPadWidthThreshold
-        
-        let percentage: CGFloat
-        if isIPad {
-            percentage = NotificationDialogConstants.WidthPercentage.forIPad(dynamicTypeSize)
-        } else if isLandscape {
-            percentage = NotificationDialogConstants.WidthPercentage.forLandscape(dynamicTypeSize)
-        } else {
-            percentage = NotificationDialogConstants.WidthPercentage.forPortrait(dynamicTypeSize)
+    private var confs: any configurations {
+        switch dynamicTypeSize {
+        case .xSmall:
+            return confXS()
+        case .small:
+            return confS()
+        case .medium:
+            return confM()
+        case .large:
+            return confL()
+        case .xLarge:
+            return confXL()
+        case .xxLarge:
+            return confXXL()
+        case .xxxLarge:
+            return confXXXL()
+        case .accessibility1 where isLandscape:
+            return confA1H()
+        case .accessibility1:
+            return confA1()
+        case .accessibility2 where isLandscape:
+            return confA2H()
+        case .accessibility2:
+            return confA2()
+        case .accessibility3 where isLandscape:
+            return confA3H()
+        case .accessibility3:
+            return confA3()
+        case .accessibility4 where isLandscape:
+            return confA4H()
+        case .accessibility4:
+            return confA4()
+        case .accessibility5 where isLandscape:
+            return confA5H()
+        case .accessibility5:
+            return confA5()
+        default:
+            return confXS()
         }
-        
-        let calculatedWidth = screenWidth * percentage
-        return min(calculatedWidth, NotificationDialogConstants.maxDialogWidth)
+    }
+    
+    private var localizedTitle: String {
+        String(format: String(localized: "“%@“ Would Like to Send You Notifications", bundle: .module), "NotificationsPM")
     }
 
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                iOS18NotificationDialogContent(
-                    appName: appName,
-                    shouldEnableScroll: shouldEnableScroll,
-                    maxContentHeight: NotificationDialogConstants.maxScrollHeight
-                )
-                buttonSection
-            }
-            .background(.regularMaterial)
-            .frame(width: dialogWidth(proxy: geometry))
-            .clipShape(.rect(cornerRadius: 16, style: .continuous))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-    }
-    
-    private var buttonSection: some View {
+        let textH = confs.dialogHeight - confs.buttonDialogHeight
+        
         VStack(spacing: 0) {
+            
+          
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(spacing: 4) {
+                    Spacer()
+                       .frame(height: confs.titleDistanceFromTop)
+                    Text(LocalizedStringKey(localizedTitle))
+                        .font(confs.titleFont)
+                        .foregroundColor(.primary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(confs.titleLeading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
+                        .font(confs.bodyFont)
+                        .foregroundColor(.primary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(confs.bodyLeading)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.horizontal, confs.horizontalTextPadding)
+            }
+            .frame(width: confs.dialogWidth, height: textH)
+            .clipped()
+      
             Divider()
             
-            if shouldStackButtons {
-                verticalButtons
+    
+            if confs.buttonsHorizontal {
+                // Horizontal buttons (no scroll) for smaller sizes
+                HStack(spacing: 0) {
+                    dontAllowButton
+                    Divider()
+                    allowButton
+                }
+                .frame(width: confs.dialogWidth, height: confs.buttonDialogHeight)
             } else {
-                horizontalButtons
+                // Vertical scrollable buttons for larger accessibility sizes
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 0) {
+                        dontAllowButton
+                        Divider()
+                        allowButton
+                    }
+                    .padding(.vertical, 8)
+                }
+                .frame(width: confs.dialogWidth, height: confs.buttonDialogHeight)
+                .clipped()
             }
         }
-    }
-    
-    private var verticalButtons: some View {
-        VStack(spacing: 0) {
-            disabledButton
-            Divider()
-            activeButton
+        .background {
+            Rectangle()
+                .fill(.regularMaterial)
         }
+        .frame(width: confs.dialogWidth, height: confs.dialogHeight)
+        .clipShape(RoundedRectangle(cornerRadius: confs.cornerRadius, style: .continuous))
     }
     
-    private var horizontalButtons: some View {
-        HStack(spacing: 0) {
-            disabledButton
-            Divider()
-            activeButton
-        }
-        .frame(height: buttonHeight)
-    }
-    
-    private var disabledButton: some View {
-        Button(action: {
-                onDontAllow?()  
-            }) {
+    private var dontAllowButton: some View {
+        Button {
+            onDontAllow?()
+        } label: {
             Text("Don't Allow", bundle: .module)
-                .font(.body.weight(.semibold))
-                .foregroundStyle(Color.blue.opacity(0.3))
+                .font(confs.buttonFont)
+                .foregroundStyle(Color.blue)
+                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
         }
-        .frame(maxWidth: .infinity, minHeight: buttonHeight)  
         .contentShape(.rect)
-        .buttonStyle(.plain)
-//        .disabled(onDontAllow == nil)
+        .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
+            label
+                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+                .background(
+                    Rectangle()
+                        .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
+                )
+        })
     }
     
-    private var activeButton: some View {
-        NotificationDialogButton(
-            title: "Allow",
-            action: onAllow
-        ).frame(minHeight: buttonHeight)
+    private var allowButton: some View {
+        Button {
+            onAllow()
+        } label: {
+            Text("Allow", bundle: .module)
+                .font(confs.buttonFont)
+                .foregroundStyle(Color.blue)
+                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+        }
+        .contentShape(.rect)
+        .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
+            label
+                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+                .background(
+                    Rectangle()
+                        .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
+                )
+        })
     }
 }
 
 #Preview {
-    iOS18NotificationView(appName: "TestApp") {
-        print("Allow tapped")
+if #available(iOS 18, *) {
+        iOS18NotificationView(
+//            confs: confA1(),
+            appName: "TestApp",
+            onAllow: {
+                print("Allow button tapped")
+            },
+            onDontAllow: {
+                print("Don't Allow button tapped")
+        })
     }
 }
-#Preview {
-    iOS18NotificationView(
-        appName: "TestApp",
-        onAllow: { print("Allow") },
-        onDontAllow: { print("Don't Allow") }
-    )
-}
+
+

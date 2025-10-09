@@ -1,12 +1,14 @@
-//  iOS26NotificationView.swift
+//
+//  iOS26NotificationsView.swift
 //  union-notifications
 //
-//  Created by Ben Sage on 9/23/25.
-//  Last update Rafi Kigner 10/05/25
-//
+//  Created by Rafi Kigner on 10/6/25.
 //
 
+
 import SwiftUI
+
+ //https://developer.apple.com/design/human-interface-guidelines/typography
 
 @available(iOS 26, *)
 struct iOS26NotificationView: View {
@@ -20,324 +22,165 @@ struct iOS26NotificationView: View {
         self.onDontAllow = onDontAllow
     }
     
-    // Portrait base dimensions
-    private let baseScreenWidth: CGFloat = 1206.0
-    private let baseScreenHeight: CGFloat = 2622.0
-    
-    // Landscape base dimensions
-    private let baseLandscapeWidth: CGFloat = 2622.0
-    private let baseLandscapeHeight: CGFloat = 1206.0
-    
     @Namespace private var glassNamespace
     
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     
-    private var isLandscape: Bool {
-        UIDevice.current.orientation.isLandscape ||
-        UIScreen.main.bounds.width > UIScreen.main.bounds.height
+    var isLandscape: Bool {
+        verticalSizeClass == .compact
     }
     
-    private var shouldStackButtons: Bool {
-        if isLandscape {
-            return false // Horizontal mode never stacks buttons
-        }
-        return dynamicTypeSize >= .xxxLarge
-    }
     
-    private var shouldAddVerticalButtonDivider: Bool {
-        dynamicTypeSize >= .accessibility3
-    }
-    
-    private var dialogWidth: CGFloat {
-        let screenWidth = UIScreen.main.bounds.width
-        return screenWidth * dialogWidthRatio
-    }
-    
-    private var dialogHeight: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        return screenHeight * dialogHeightRatio
-    }
-    
-    private var buttonHeight: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        return screenHeight * buttonHeightRatio
-    }
-    
-    private var buttonWidth: CGFloat {
-        let screenWidth = UIScreen.main.bounds.width
-        return screenWidth * buttonWidthRatio
-    }
-    
-    private var dialogWidthRatio: CGFloat {
-        if isLandscape {
-            // Landscape ratios
-            switch dynamicTypeSize {
-            case ...(.large): return (990.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            case .xLarge: return (960.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            case .xxLarge: return (960.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            case .xxxLarge: return (1000.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            case .accessibility1, .accessibility2, .accessibility3, .accessibility4, .accessibility5:
-                return (1100.0  / 3.0) / (baseLandscapeWidth / 3.0)
-            default: return (990.0 - 48 / 3.0) / (baseLandscapeWidth / 3.0)
-            }
-        } else {
-            // Portrait ratios
-            switch dynamicTypeSize {
-            case ...(.xxxLarge): return (960.0 / 3.0) / (baseScreenWidth / 3.0)
-            case .accessibility1, .accessibility2, .accessibility3, .accessibility4, .accessibility5:
-                return (1100.0 / 3.0) / (baseScreenWidth / 3.0)
-            default: return (960.0 / 3.0) / (baseScreenWidth / 3.0)
-            }
-        }
-    }
+    private var sizes: any NotificationSizes {
+        switch dynamicTypeSize {
+        case .xSmall:
+            return sizeXS()
+        case .small:
+            return sizeS()
+        case .medium:
+            return sizeM()
+        case .large:
+            return sizeL()
+        case .xLarge:
+            return sizeXL()
+        case .xxLarge:
+            return sizeXXL()
+        case .xxxLarge where isLandscape:
+            return sizeXXXLH()
+            //Go somewhere else...for all subsequent scrollables
+        case .xxxLarge:
+            return sizeXXXL()
+        case .accessibility1 where isLandscape:
+            return sizeA1H()
+        case .accessibility1:
+            return sizeA1() //not sure we need the H
+            //Handle A1 Vertical here cause nothing scrolls...everythign else...new file
+        case .accessibility2 where isLandscape:
+            return sizeA2H()
+        case .accessibility2:
+            return sizeA2()
+        case .accessibility3 where isLandscape:
+            return sizeA3H()
+        case .accessibility3:
+            return sizeA3()
+        case .accessibility4 where isLandscape:
+            return sizeA4H()
+        case .accessibility4:
+            return sizeA4()
+        case .accessibility5 where isLandscape:
+            return sizeA5H()
+        case .accessibility5:
+            return sizeA5()
 
-    private var dialogHeightRatio: CGFloat {
-        if isLandscape {
-            // Landscape ratios
-            switch dynamicTypeSize {
-            case ...(.large): return (660.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .xLarge: return (810.0 - 48 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .xxLarge: return (960.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .xxxLarge: return (960.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .accessibility1, .accessibility2, .accessibility3, .accessibility4, .accessibility5:
-                return (1100.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            default: return (660.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            }
-        } else {
-            // Portrait ratios
-            switch dynamicTypeSize {
-            case ...(.large): return (670.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .xLarge: return (810.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .xxLarge: return (960.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .xxxLarge: return (1220.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility1: return (1560.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility2: return (1990.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility3, .accessibility4, .accessibility5:
-                return (2175.0 / 3.0) / (baseScreenHeight / 3.0)
-            default: return (670.0 / 3.0) / (baseScreenHeight / 3.0)
-            }
-        }
-    }
-
-    
-    private var buttonWidthRatio: CGFloat {
-        if isLandscape {
-            // Landscape ratios - buttons are always horizontal
-            switch dynamicTypeSize {
-            case ...(.xxLarge): return (420.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            case .xxxLarge: return (860.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            case .accessibility1, .accessibility2, .accessibility3, .accessibility4, .accessibility5:
-                return (1000.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            default: return (420.0 / 3.0) / (baseLandscapeWidth / 3.0)
-            }
-        } else {
-            // Portrait ratios
-            switch dynamicTypeSize {
-            case ...(.xxLarge): return (420.0 / 3.0) / (baseScreenWidth / 3.0)
-            case .xxxLarge: return (860.0 / 3.0) / (baseScreenWidth / 3.0)
-            case .accessibility1, .accessibility2, .accessibility3, .accessibility4, .accessibility5:
-                return (1000.0 / 3.0) / (baseScreenWidth / 3.0)
-            default: return (420.0 / 3.0) / (baseScreenWidth / 3.0)
-            }
+        default:
+            return sizeXS()
         }
     }
     
-    private var buttonHeightRatio: CGFloat {
-        if isLandscape {
-            // Landscape ratios
-            switch dynamicTypeSize {
-            case ...(.xxLarge): return (145.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .xxxLarge: return (144.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .accessibility1: return (200.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .accessibility2: return (250.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .accessibility3: return (300.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .accessibility4: return (350.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            case .accessibility5: return (400.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            default: return (145.0 / 3.0) / (baseLandscapeHeight / 3.0)
-            }
-        } else {
-            // Portrait ratios
-            switch dynamicTypeSize {
-            case ...(.xxLarge): return (103.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .xxxLarge: return (103.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility1: return (262.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility2: return (202.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility3: return (258.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility4: return (302.0 / 3.0) / (baseScreenHeight / 3.0)
-            case .accessibility5: return (358.0 / 3.0) / (baseScreenHeight / 3.0)
-            default: return (103.0 / 3.0) / (baseScreenHeight / 3.0)
-            }
-        }
-    }
     
-    private var buttonGap: CGFloat {
-        if isLandscape {
-            let screenWidth = UIScreen.main.bounds.width
-            return screenWidth * (24.0 / baseLandscapeWidth)
-        } else {
-            return 8
-        }
-    }
-    
-    private var shouldShowScrollable: Bool {
-        if isLandscape {
-            return dynamicTypeSize >= .xxxLarge
-        }
-        return false
-    }
-    
-    private var shouldShowDivider: Bool {
-        if isLandscape {
-            return dynamicTypeSize >= .xxxLarge
-        }
-        return false
-    }
-
     private var localizedTitle: String {
-     String(format: String(localized: "“%@“ Would Like to Send You Notifications", bundle: .module), appName)
-     }
+        String(format: String(localized: "“%@“ Would Like to Send You Notifications", bundle: .module), "NotificationsPM")
+        //appName
+    }
+    
+
+    
     
     var body: some View {
-        if isLandscape {
-            landscapeBody
-        } else {
-            portraitBody
-        }
-    }
-    
-    private var portraitBody: some View {
         GlassEffectContainer(spacing: 0) {
-            VStack(alignment: .leading, spacing: 0) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(LocalizedStringKey(localizedTitle))
-                            .font(.title3.weight(.semibold))
-                            .foregroundStyle(.primary)
-                            //.lineSpacing(scaledLineSpacing)
-                            .padding(.top, 20)
-                        
-                        //Spacer(minLength: scaledBetweenText)
-                        
-                        Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                            .font(.body.weight(.regular))
-                            .foregroundStyle(.secondary)
-                         //   .lineSpacing(scaledLineSpacing)
-                    }
+            if (isLandscape && !sizes.buttonsHorizontal && dynamicTypeSize >= .xxxLarge) || //turn this back to .xxLarge later and fix it up nice nice
+                (!isLandscape && dynamicTypeSize >= .xxxLarge) {
+                ZStack {  // Add explicit container
+                    iOS26NotificationViewScrollable(
+                        sizes: sizes,
+                        appName: appName,
+                        onAllow: onAllow,
+                        onDontAllow: onDontAllow
+                    )
                 }
-                .padding(.horizontal, 30)
-                
-                buttonSection
-                    .padding(.bottom, 23)
-                    .padding(.horizontal, 16)
+                .frame(height: sizes.dialogHeight)
+//                .clipped()
+            }else{
+                ZStack(alignment: .bottom) {
+                    // Buttons FIRST (behind text)
+                    buttonSection
+                        .zIndex(0)
+                    
+                    Text(LocalizedStringKey(localizedTitle))
+                        .font(sizes.titleFont)
+                        .foregroundColor(.primary)
+                        .lineSpacing(sizes.titleLeading)
+                        .padding(.horizontal, sizes.horizontalTextPadding)
+                        .padding(.trailing, sizes.rightTitlePadding)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .offset(y: -sizes.titleDistanceFromBottom)
+                        .zIndex(1)
+                    
+                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
+                        .font(sizes.bodyFont)
+                        .foregroundColor(.secondary)
+                        .lineSpacing(sizes.bodyLeading)
+                        .padding(.horizontal, sizes.horizontalTextPadding)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .offset(y: -sizes.bodyTextDistanceFromBottom)
+                        .zIndex(1)
+                    
+                    
+                }
+                .frame(height: sizes.dialogHeight)
+                .clipped()
             }
         }
-        .frame(width: dialogWidth, height: dialogHeight)
-        .glassEffect(in: .rect(cornerRadius: 32))
-        .glassEffect(in: .rect(cornerRadius: 32))
+        .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
+        .clipped()
+        .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
+//        .ios26Glass(cornerRadius: sizes.cornerRadius, material: .thinMaterial)  // or .regularMaterial
+        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
+        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
+        .transition(.scale.combined(with: .opacity))
     }
-    
-    private var landscapeBody: some View {
-        GlassEffectContainer(spacing: 0) {
-            HStack(spacing: 0) {
-
-                if shouldShowScrollable {
-                    ScrollView {
-                        textContent
-                    }
-                    .frame(maxWidth: .infinity)
-                } else {
-                    textContent
-                        .frame(maxWidth: .infinity)
-                }
-                
-                if shouldShowDivider {
-                    Divider()
-                        .padding(.vertical, 16)
-                }
-                
-                landscapeButtonSection
-            }
-        }
-        .frame(width: dialogWidth, height: dialogHeight)
-        .glassEffect(in: .rect(cornerRadius: 32))
-        .glassEffect(in: .rect(cornerRadius: 32))
-    }
-    
-    private var textContent: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(LocalizedStringKey(localizedTitle))
-                .font(.title3.weight(.semibold))
-                .foregroundStyle(.primary)
-     //           .lineSpacing(scaledLineSpacing)
-                .padding(.top, 20)
-            
-
-            
-            Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                .font(.body.weight(.regular))
-                .foregroundStyle(.secondary)
-   //             .lineSpacing(scaledLineSpacing)
-            
-            Spacer()
-        }
-        .padding(.horizontal, 30)
-    }
-    
-    private var landscapeButtonSection: some View {
-        Group {
-            if shouldShowScrollable {
-                ScrollView {
-                    VStack(spacing: buttonGap) {
-                        disabledButton
-                        activeButton
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 16)
-                }
-            } else {
-                VStack(spacing: buttonGap) {
-                    disabledButton
-                    activeButton
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 16)
-            }
-        }
-    }
-    
     private var buttonSection: some View {
         VStack(spacing: 0) {
-            if shouldStackButtons {
-                verticalButtons
+            if isLandscape {
+                if !sizes.buttonsHorizontal && dynamicTypeSize < .xxxLarge {
+                    ZStack(alignment: .bottom) {
+                        ScrollView(.vertical, showsIndicators: true) {
+                            VStack(spacing: 10) {
+                                disabledButton
+                                enabledButton
+                            }
+                            .clipped()
+                            .frame(maxWidth: .infinity)
+                            .zIndex(0)
+                        }
+                        .clipped()
+                        .frame(height: sizes.buttonHeight * 1.5)
+                        // This should stop content
+                      
+                    }
+                    .clipped()
+                    .offset(y: sizes.buttonDistanceFromBottom)
+                 
+                  
+                    
+                } else {
+                    HStack {
+                        disabledButton
+                        enabledButton
+                    }
+                    .frame(maxWidth: .infinity)
+                    .offset(y: sizes.buttonDistanceFromBottom)
+                }
             } else {
-                horizontalButtons
+                HStack {
+                    disabledButton
+                    enabledButton
+                }
+                .frame(maxWidth: .infinity)
+                .offset(y: sizes.buttonDistanceFromBottom)
             }
         }
-    }
-    
-    private var verticalButtons: some View {
-        VStack(spacing: 8) {
-            if shouldAddVerticalButtonDivider {
-                Divider()
-                disabledButton
-                    .buttonBorderShape(.roundedRectangle(radius: 36))
-                    .padding(.top, 8)
-                activeButton
-                    .buttonBorderShape(.roundedRectangle(radius: 36))
-            } else {
-                disabledButton
-                activeButton
-            }
-        }
-    }
-    
-    private var horizontalButtons: some View {
-        HStack(spacing: 8) {
-            disabledButton
-            activeButton
-        }
-        .frame(height: buttonHeight)
     }
     
     private var disabledButton: some View {
@@ -345,33 +188,40 @@ struct iOS26NotificationView: View {
             onDontAllow?()
         } label: {
             Text("Don't Allow", bundle: .module)
-                .font(.body.weight(.medium))
-                .foregroundStyle(.secondary)
-                .frame(maxWidth: .infinity)
-                .frame(height: buttonHeight)
+                .font(sizes.buttonFont)
+                .foregroundStyle(.gray.opacity(0.50))
+                .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)
         }
-        .glassEffect()
+        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
         .buttonStyle(.glass)
+ 
     }
     
-    private var activeButton: some View {
+    private var enabledButton: some View {
         Button {
             onAllow()
         } label: {
             Text("Allow", bundle: .module)
-                .font(.body.weight(.semibold))
-                .foregroundStyle(.primary)
-                .frame(maxWidth: .infinity)
-                .frame(height: buttonHeight)
+                .font(sizes.buttonFont)
+                .foregroundStyle(.black)
+                .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)
         }
+        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
+        .transition(.scale.combined(with: .opacity))
         .buttonStyle(.glass(.regular))
-        .glassEffect(.regular.tint(.black.opacity(0.05)))
+        .glassEffect(.regular.tint(.gray.opacity(0.05)))
+        
     }
+
 }
+
+
+
+
 
 //#Preview {
 //    if #available(iOS 26, *) {
-//        iOS26NotificationView(
+//        iOS26NotificationView2(
 //            appName: "TestApp",
 //            onAllow: {
 //                print("Allow button tapped")
@@ -382,5 +232,5 @@ struct iOS26NotificationView: View {
 //        )
 //    }
 //}
-
+//
 
