@@ -1,0 +1,5 @@
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = "Приложение «%@» запрашивает разрешение на отправку уведомлений";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Уведомления могут содержать напоминания, звуки и наклейки значков. Их конфигурирование возможно в Настройках.";
+"Allow" = "Разрешить";
+"Don't Allow" = "Не разрешать";

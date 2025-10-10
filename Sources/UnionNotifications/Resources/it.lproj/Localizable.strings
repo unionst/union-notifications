@@ -1,11 +1,8 @@
 /* Notification Permission Dialog */
-"notification.permission.title" = "PLACEHOLDER";
-"notification.permission.message" = "PLACEHOLDER";
-"notification.permission.allow" = "PLACEHOLDER";
-"notification.permission.dontAllow" = "PLACEHOLDER";
-"notification.permission.enable" = "PLACEHOLDER";
-"notification.permission.subtitle" = "PLACEHOLDER";
-
+"\"%@\" Would Like to Send You Notifications" = ""%@" vorrebbe inviarti delle notifiche";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Le notifiche possono includere avvisi, suoni e badge icone configurabili in Impostazioni.";
+"Allow" = "Consenti";
+"Don't Allow" = "Non consentire";
 /* Test View */
-"notification.test.title" = "PLACEHOLDER";
-"notification.test.button" = "PLACEHOLDER";
+"Notification Permission Dialog Test" = "Test dialogo permesso notifiche";
+"Show Notification Dialog" = "Mostra dialogo notifiche";

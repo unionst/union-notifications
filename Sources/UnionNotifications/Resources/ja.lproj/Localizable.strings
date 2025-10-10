@@ -1,11 +1,9 @@
-/* Notification Permission Dialog */
-"notification.permission.title" = "PLACEHOLDER";
-"notification.permission.message" = "PLACEHOLDER";
-"notification.permission.allow" = "PLACEHOLDER";
-"notification.permission.dontAllow" = "PLACEHOLDER";
-"notification.permission.enable" = "PLACEHOLDER";
-"notification.permission.subtitle" = "PLACEHOLDER";
 
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = ""%@"は通知を送信します。よろしいですか?";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "通知方法は、テキスト、サウンド、アイコンバッジが利用できる可能性があります。通知方法は"設定"で設定できます。";
+"Allow" = "許可";
+"Don't Allow" = "許可しない";
 /* Test View */
-"notification.test.title" = "PLACEHOLDER";
-"notification.test.button" = "PLACEHOLDER";
+"Notification Permission Dialog Test" = "通知許可ダイアログテスト";
+"Show Notification Dialog" = "通知ダイアログを表示";

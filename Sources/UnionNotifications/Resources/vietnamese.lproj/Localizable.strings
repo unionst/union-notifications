@@ -1,0 +1,5 @@
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = ""%@" muốn gửi thông báo cho bạn";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Thông báo có thể bao gồm cảnh báo, âm thanh và biểu tượng. Bạn có thể định cấu hình trong Cài đặt.";
+"Allow" = "Cho phép";
+"Don't Allow" = "Từ chối";

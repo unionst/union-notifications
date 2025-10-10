@@ -1,11 +1,9 @@
 /* Notification Permission Dialog */
-"notification.permission.title" = "PLACEHOLDER";
-"notification.permission.message" = "PLACEHOLDER";
-"notification.permission.allow" = "PLACEHOLDER";
-"notification.permission.dontAllow" = "PLACEHOLDER";
-"notification.permission.enable" = "PLACEHOLDER";
-"notification.permission.subtitle" = "PLACEHOLDER";
 
+"\"%@\" Would Like to Send You Notifications" = ""%@"想给你发送通知";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "通知可能包括提醒、声音和图标标记。可在"设置"中配置相关功能。";
+"Allow" = "允许";
+"Don't Allow" = "不允许";
 /* Test View */
-"notification.test.title" = "PLACEHOLDER";
-"notification.test.button" = "PLACEHOLDER";
+"Notification Permission Dialog Test" = "通知权限对话框测试";
+"Show Notification Dialog" = "显示通知对话框";
