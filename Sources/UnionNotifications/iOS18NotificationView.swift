@@ -2,7 +2,7 @@
 //  union-notifications
 //
 //  Created by Ben Sage on 9/23/25.
-//  Last Update Rafi Kigner 9/30/25
+//  Last Update Rafi Kigner 10/10/25
 
 import SwiftUI
 import UnionButtons
@@ -24,48 +24,52 @@ struct iOS18NotificationView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     
+    private var textHeight: CGFloat {
+        configs.dialogHeight - configs.buttonDialogHeight
+    }
+    
     var isLandscape: Bool {
         verticalSizeClass == .compact
     }
     
-    private var confs: any configurations {
+    private var configs: any configurations {
         switch dynamicTypeSize {
         case .xSmall:
-            return confXS()
+            return configXS()
         case .small:
-            return confS()
+            return configS()
         case .medium:
-            return confM()
+            return configM()
         case .large:
-            return confL()
+            return configL()
         case .xLarge:
-            return confXL()
+            return configXL()
         case .xxLarge:
-            return confXXL()
+            return configXXL()
         case .xxxLarge:
-            return confXXXL()
+            return configXXXL()
         case .accessibility1 where isLandscape:
-            return confA1H()
+            return configA1H()
         case .accessibility1:
-            return confA1()
+            return configA1()
         case .accessibility2 where isLandscape:
-            return confA2H()
+            return configA2H()
         case .accessibility2:
-            return confA2()
+            return configA2()
         case .accessibility3 where isLandscape:
-            return confA3H()
+            return configA3H()
         case .accessibility3:
-            return confA3()
+            return configA3()
         case .accessibility4 where isLandscape:
-            return confA4H()
+            return configA4H()
         case .accessibility4:
-            return confA4()
+            return configA4()
         case .accessibility5 where isLandscape:
-            return confA5H()
+            return configA5H()
         case .accessibility5:
-            return confA5()
+            return configA5()
         default:
-            return confXS()
+            return configXS()
         }
     }
     
@@ -75,47 +79,31 @@ struct iOS18NotificationView: View {
 
 
     var body: some View {
-        let textH = confs.dialogHeight - confs.buttonDialogHeight
         
         VStack(spacing: 0) {
-            
-          
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(spacing: 4) {
-                    Spacer()
-                       .frame(height: confs.titleDistanceFromTop)
-                    Text(LocalizedStringKey(localizedTitle))
-                        .font(confs.titleFont)
-                        .foregroundColor(.primary)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(confs.titleLeading)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                        .font(confs.bodyFont)
-                        .foregroundColor(.primary)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(confs.bodyLeading)
-                        .fixedSize(horizontal: false, vertical: true)
+            if ((dynamicTypeSize >= .xxxLarge && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
+                ScrollView(.vertical, showsIndicators: true) {
+                    content
+                        .frame(width: configs.dialogWidth)
+                        .clipped()
                 }
-                .padding(.horizontal, confs.horizontalTextPadding)
+            } else {
+                
+                content
+                    .frame(width: configs.dialogWidth, height: textHeight)
+                    .clipped()
             }
-            .frame(width: confs.dialogWidth, height: textH)
-            .clipped()
-      
-            Divider()
             
+            Divider()
     
-            if confs.buttonsHorizontal {
-                // Horizontal buttons (no scroll) for smaller sizes
+            if configs.buttonsHorizontal {
                 HStack(spacing: 0) {
                     dontAllowButton
                     Divider()
                     allowButton
                 }
-                .frame(width: confs.dialogWidth, height: confs.buttonDialogHeight)
+                .frame(width: configs.dialogWidth, height: configs.buttonDialogHeight)
             } else {
-                // Vertical scrollable buttons for larger accessibility sizes
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 0) {
                         dontAllowButton
@@ -124,7 +112,7 @@ struct iOS18NotificationView: View {
                     }
                     .padding(.vertical, 8)
                 }
-                .frame(width: confs.dialogWidth, height: confs.buttonDialogHeight)
+                .frame(width: configs.dialogWidth, height: configs.buttonDialogHeight)
                 .clipped()
             }
         }
@@ -132,8 +120,8 @@ struct iOS18NotificationView: View {
             Rectangle()
                 .fill(.regularMaterial)
         }
-        .frame(width: confs.dialogWidth, height: confs.dialogHeight)
-        .clipShape(RoundedRectangle(cornerRadius: confs.cornerRadius, style: .continuous))
+        .frame(width: configs.dialogWidth, height: configs.dialogHeight)
+        .clipShape(RoundedRectangle(cornerRadius: configs.cornerRadius, style: .continuous))
     }
     
     private var dontAllowButton: some View {
@@ -141,14 +129,14 @@ struct iOS18NotificationView: View {
             onDontAllow?()
         } label: {
             Text("Don't Allow", bundle: .module)
-                .font(confs.buttonFont)
+                .font(configs.buttonFont)
                 .foregroundStyle(Color.blue.opacity(0.3))
-                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
         }
         .contentShape(.rect)
         .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
             label
-                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
                 .background(
                     Rectangle()
                         .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
@@ -156,19 +144,42 @@ struct iOS18NotificationView: View {
         })
     }
     
+    
+    private var content: some View {
+
+            VStack(spacing: 4) {
+                Spacer()
+                   .frame(height: configs.titleDistanceFromTop)
+                Text(LocalizedStringKey(localizedTitle))
+                    .font(configs.titleFont)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(configs.titleLeading)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
+                    .font(configs.bodyFont)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(configs.bodyLeading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.horizontal, configs.horizontalTextPadding)
+    }
+    
     private var allowButton: some View {
         Button {
             onAllow()
         } label: {
             Text("Allow", bundle: .module)
-                .font(confs.buttonFont)
+                .font(configs.buttonFont)
                 .foregroundStyle(Color.blue)
-                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
         }
         .contentShape(.rect)
         .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
             label
-                .frame(maxWidth: .infinity, minHeight: confs.buttonHeight)
+                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
                 .background(
                     Rectangle()
                         .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
@@ -180,7 +191,6 @@ struct iOS18NotificationView: View {
 #Preview {
 if #available(iOS 18, *) {
         iOS18NotificationView(
-//            confs: confA1(),
             appName: "TestApp",
             onAllow: {
                 print("Allow button tapped")

@@ -1,10 +1,9 @@
-////
+//
 //  iOS26NotificationsView.swift
 //  union-notifications
 //
-//  Created by Rafi Kigner on 10/6/25.
+//  Created by Ben Sage on 9/23/25
 //
-
 
 import SwiftUI
 
@@ -48,14 +47,12 @@ struct iOS26NotificationView: View {
             return sizeXXL()
         case .xxxLarge where isLandscape:
             return sizeXXXLH()
-            //Go somewhere else...for all subsequent scrollables
         case .xxxLarge:
             return sizeXXXL()
         case .accessibility1 where isLandscape:
             return sizeA1H()
         case .accessibility1:
-            return sizeA1() //not sure we need the H
-            //Handle A1 Vertical here cause nothing scrolls...everythign else...new file
+            return sizeA1()
         case .accessibility2 where isLandscape:
             return sizeA2H()
         case .accessibility2:
@@ -80,154 +77,144 @@ struct iOS26NotificationView: View {
     
     
     private var localizedTitle: String {
-        String(format: String(localized: "“%@“ Would Like to Send You Notifications", bundle: .module), "NotificationsPM")
-        //appName
+        String(format: String(localized: "“%@“ Would Like to Send You Notifications", bundle: .module), appName)
+    }
+    
+    private var textHeight: CGFloat {
+        sizes.dialogHeight - sizes.buttonDialogHeight
     }
     
 
-    
-    
     var body: some View {
-        GlassEffectContainer(spacing: 0) {
-            if (isLandscape && !sizes.buttonsHorizontal && dynamicTypeSize >= .xxxLarge) || //turn this back to .xxLarge later and fix it up nice nice
-                (!isLandscape && dynamicTypeSize >= .xxxLarge) {
-                ZStack {  // Add explicit container
-                    iOS26NotificationViewScrollable(
-                        sizes: sizes,
-                        appName: appName,
-                        onAllow: onAllow,
-                        onDontAllow: onDontAllow
-                    )
-                }
-                .frame(height: sizes.dialogHeight)
-//                .clipped()
-            }else{
-                ZStack(alignment: .bottom) {
-                    // Buttons FIRST (behind text)
-                    buttonSection
-                        .zIndex(0)
-                    
-                    Text(LocalizedStringKey(localizedTitle))
-                        .font(sizes.titleFont)
-                        .foregroundColor(.primary)
-                        .lineSpacing(sizes.titleLeading)
-                        .padding(.horizontal, sizes.horizontalTextPadding)
-                        .padding(.trailing, sizes.rightTitlePadding)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .offset(y: -sizes.titleDistanceFromBottom)
-                        .zIndex(1)
-                    
-                    Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.", bundle: .module)
-                        .font(sizes.bodyFont)
-                        .foregroundColor(.secondary)
-                        .lineSpacing(sizes.bodyLeading)
-                        .padding(.horizontal, sizes.horizontalTextPadding)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .offset(y: -sizes.bodyTextDistanceFromBottom)
-                        .zIndex(1)
-                    
-                    
-                }
-                .frame(height: sizes.dialogHeight)
-                .clipped()
-            }
-        }
-        .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
-        .clipped()
-        .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
-        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
-        .transition(.scale.combined(with: .opacity))
-    }
-    private var buttonSection: some View {
         VStack(spacing: 0) {
-            if isLandscape {
-                if !sizes.buttonsHorizontal && dynamicTypeSize < .xxxLarge {
-                    ZStack(alignment: .bottom) {
-                        ScrollView(.vertical, showsIndicators: true) {
-                            VStack(spacing: 10) {
-                                disabledButton
-                                enabledButton
-                            }
-                            .clipped()
-                            .frame(maxWidth: .infinity)
-                            .zIndex(0)
-                        }
+            if ((dynamicTypeSize >= .xxxLarge && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
+                ScrollView(.vertical, showsIndicators: true) {
+                    textContent
+                        .frame(width: sizes.dialogWidth )
                         .clipped()
-                        .frame(height: sizes.buttonHeight * 1.5)
-                        // This should stop content
-                      
-                    }
-                    .clipped()
-                    .offset(y: sizes.buttonDistanceFromBottom)
-                 
-                  
-                    
-                } else {
-                    HStack {
-                        disabledButton
-                        enabledButton
-                    }
-                    .frame(maxWidth: .infinity)
-                    .offset(y: sizes.buttonDistanceFromBottom)
                 }
+            }else{
+                textContent
+                    .frame(width: sizes.dialogWidth)
+                    .clipped()
+            }
+            if dynamicTypeSize <= .accessibility1 {
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(height: 0)
             } else {
-                HStack {
+                Divider()
+            }
+            
+            if sizes.buttonsHorizontal {
+                HStack(spacing: 8) {
                     disabledButton
                     enabledButton
                 }
-                .frame(maxWidth: .infinity)
-                .offset(y: sizes.buttonDistanceFromBottom)
+                .padding(.top, 0)
+                .padding(.bottom, sizes.textToButtonSpacing)
+                .frame(width: sizes.dialogWidth)
+            } else {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 8) {
+                        disabledButton
+                        enabledButton
+                    }
+                    .padding(.top, 15)
+                    .padding(.bottom, 15)
+                    .frame(width: sizes.dialogWidth)
+                }
+                .frame(width: sizes.dialogWidth, height: sizes.buttonDialogHeight)
+                 .compositingGroup()
+                 .clipped()
+                 .onAppear {
+                     UIScrollView.appearance().bounces = false
+                 }
             }
+            
         }
+        .frame(width: sizes.dialogWidth, height: sizes.dialogHeight)
+        .clipped()
+        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
+        .transition(.scale.combined(with: .opacity))
+      
+    }
+    
+    private var textContent: some View {
+        VStack(spacing: 0) {
+            Spacer()
+                .frame(height:sizes.titleDistanceFromTop )
+            
+            Text(localizedTitle)
+                .font(sizes.titleFont)
+                .foregroundColor(.primary)
+                .lineSpacing(sizes.titleLeading)
+                .padding(.horizontal, sizes.horizontalTextPadding)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Spacer()
+                .frame(height: sizes.titleToBodySpacing)
+            
+            Text("Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.")
+                .font(sizes.bodyFont)
+                .foregroundColor(.secondary)
+                .lineSpacing(sizes.bodyLeading)
+                .padding(.horizontal, sizes.horizontalTextPadding)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Spacer()
+                .frame(height: sizes.textToButtonSpacing)
+        }
+        
     }
     
     private var disabledButton: some View {
         Button {
             onDontAllow?()
         } label: {
-            Text("Don't Allow", bundle: .module)
+            Text("Don't Allow")
                 .font(sizes.buttonFont)
-                .foregroundStyle(.gray.opacity(0.50))
+                .foregroundStyle(.primary.opacity(0.25))
                 .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)
+                .background(
+                    RoundedRectangle(cornerRadius: sizes.cornerRadius)
+                        .fill(.gray.opacity(0.05))
+                )
+            
         }
-//        .glassEffect(.regular, in: .rect(cornerRadius: sizes.cornerRadius))
-        .buttonStyle(.glass)
- 
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: sizes.cornerRadius))
+        .buttonStyle(.plain)
     }
-    
+
     private var enabledButton: some View {
         Button {
             onAllow()
         } label: {
-            Text("Allow", bundle: .module)
+            Text("Allow")
                 .font(sizes.buttonFont)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
                 .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)
+                .background(
+                    RoundedRectangle(cornerRadius: sizes.cornerRadius)
+                        .fill(.gray.opacity(0.15))
+                )
         }
-        .transition(.scale.combined(with: .opacity))
-        .buttonStyle(.glass(.regular))
-        .glassEffect(.regular.tint(.gray.opacity(0.05)))
-        
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: sizes.cornerRadius))
+        .buttonStyle(.plain)
     }
-
 }
 
 
-
-
-
-//#Preview {
-//    if #available(iOS 26, *) {
-//        iOS26NotificationView2(
-//            appName: "TestApp",
-//            onAllow: {
-//                print("Allow button tapped")
-//            },
-//            onDontAllow: {
-//                print("Don't Allow button tapped")
-//            }
-//        )
-//    }
-//}
-//
-
+#Preview {
+    if #available(iOS 26, *) {
+        iOS26NotificationView(
+            appName: "TestApp",
+            onAllow: {
+                print("Allow button tapped")
+            },
+            onDontAllow: {
+                print("Don't Allow button tapped")
+            }
+        )
+    }
+}
