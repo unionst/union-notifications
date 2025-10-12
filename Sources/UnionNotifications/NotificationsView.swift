@@ -13,7 +13,7 @@ public struct NotificationsView: View {
         action: @escaping () -> Void = {},
         onDontAllow: (() -> Void)? = nil
     ) {
-        self.appName = Bundle.main.displayName ?? "App"
+        self.appName = (Bundle.main.displayName) ?? "App"
         self.requestSystemPermission = requestSystemPermission
         self.action = action
         self.onDontAllow = onDontAllow

@@ -93,17 +93,19 @@ struct iOS26NotificationView: View {
                         .frame(width: sizes.dialogWidth )
                         .clipped()
                 }
+//               .frame(height: textHeight)
             }else{
                 textContent
                     .frame(width: sizes.dialogWidth)
                     .clipped()
             }
-            if dynamicTypeSize <= .accessibility1 {
+            if (isLandscape && dynamicTypeSize > .xxxLarge) ||
+               (dynamicTypeSize >= .accessibility3) {
+                Divider()
+            } else {
                 Rectangle()
                     .fill(Color.clear)
                     .frame(height: 0)
-            } else {
-                Divider()
             }
             
             if sizes.buttonsHorizontal {
@@ -116,6 +118,8 @@ struct iOS26NotificationView: View {
                 .frame(width: sizes.dialogWidth)
             } else {
                 ScrollView(.vertical, showsIndicators: true) {
+                    
+                   // Divider()
                     VStack(spacing: 8) {
                         disabledButton
                         enabledButton
@@ -150,7 +154,9 @@ struct iOS26NotificationView: View {
                 .foregroundColor(.primary)
                 .lineSpacing(sizes.titleLeading)
                 .padding(.horizontal, sizes.horizontalTextPadding)
+                .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                
             
             Spacer()
                 .frame(height: sizes.titleToBodySpacing)
@@ -160,6 +166,7 @@ struct iOS26NotificationView: View {
                 .foregroundColor(.secondary)
                 .lineSpacing(sizes.bodyLeading)
                 .padding(.horizontal, sizes.horizontalTextPadding)
+                .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
@@ -172,7 +179,7 @@ struct iOS26NotificationView: View {
         Button {
             onDontAllow?()
         } label: {
-            Text("Don't Allow")
+            Text("Don’t Allow")
                 .font(sizes.buttonFont)
                 .foregroundStyle(.primary.opacity(0.25))
                 .frame(width: sizes.buttonWidth, height: sizes.buttonHeight)

@@ -128,7 +128,7 @@ struct iOS18NotificationView: View {
         Button {
             onDontAllow?()
         } label: {
-            Text("Don't Allow", bundle: .module)
+            Text("Don’t Allow", bundle: .module)
                 .font(configs.buttonFont)
                 .foregroundStyle(Color.blue.opacity(0.3))
                 .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
