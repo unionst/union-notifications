@@ -81,7 +81,7 @@ struct iOS18NotificationView: View {
     var body: some View {
         
         VStack(spacing: 0) {
-            if ((dynamicTypeSize >= .xxxLarge && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
+            if ((dynamicTypeSize > .xxxLarge && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
                 ScrollView(.vertical, showsIndicators: true) {
                     content
                         .frame(width: configs.dialogWidth)
@@ -96,6 +96,7 @@ struct iOS18NotificationView: View {
             
             Divider()
     
+     
             if configs.buttonsHorizontal {
                 HStack(spacing: 0) {
                     dontAllowButton
@@ -103,7 +104,7 @@ struct iOS18NotificationView: View {
                     allowButton
                 }
                 .frame(width: configs.dialogWidth, height: configs.buttonDialogHeight)
-            } else {
+            } else if (dynamicTypeSize >=  .accessibility3) && isLandscape || (dynamicTypeSize >  .accessibility5 && !isLandscape) {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 0) {
                         dontAllowButton
@@ -114,6 +115,15 @@ struct iOS18NotificationView: View {
                 }
                 .frame(width: configs.dialogWidth, height: configs.buttonDialogHeight)
                 .clipped()
+            } else {
+                VStack(spacing: 0) {
+                    dontAllowButton
+                        .frame(height: configs.buttonDialogHeight / 2)
+                    Divider()
+                    allowButton
+                        .frame(height: configs.buttonDialogHeight / 2)
+                }
+                .frame(width: configs.dialogWidth, height: configs.buttonDialogHeight)
             }
         }
         .background {
@@ -123,27 +133,6 @@ struct iOS18NotificationView: View {
         .frame(width: configs.dialogWidth, height: configs.dialogHeight)
         .clipShape(RoundedRectangle(cornerRadius: configs.cornerRadius, style: .continuous))
     }
-    
-    private var dontAllowButton: some View {
-        Button {
-            onDontAllow?()
-        } label: {
-            Text("Don’t Allow", bundle: .module)
-                .font(configs.buttonFont)
-                .foregroundStyle(Color.blue.opacity(0.3))
-                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
-        }
-        .contentShape(.rect)
-        .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
-            label
-                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
-                .background(
-                    Rectangle()
-                        .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
-                )
-        })
-    }
-    
     
     private var content: some View {
 
@@ -167,6 +156,28 @@ struct iOS18NotificationView: View {
             .padding(.horizontal, configs.horizontalTextPadding)
     }
     
+    
+    private var dontAllowButton: some View {
+        Button {
+            onDontAllow?()
+        } label: {
+            Text("Don’t Allow", bundle: .module)
+                .font(configs.buttonFont)
+                .foregroundStyle(Color.blue.opacity(0.3))
+                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
+        }
+        .contentShape(.rect)
+        .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
+            label
+                .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
+                .background(
+                    RoundedRectangle(cornerRadius: 0, style: .continuous)
+                        .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
+                )
+        })
+    }
+    
+
     private var allowButton: some View {
         Button {
             onAllow()
@@ -181,7 +192,7 @@ struct iOS18NotificationView: View {
             label
                 .frame(maxWidth: .infinity, minHeight: configs.buttonHeight)
                 .background(
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: 0, style: .continuous)
                         .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
                 )
         })
