@@ -31,18 +31,18 @@ protocol NotificationSizes {
 struct sizeXS: NotificationSizes {
     var dialogHeight: CGFloat = 243.0
     var titleFont: Font = .title3.weight(.semibold)
-    var bodyFont: Font = .body.weight(.regular)
-    var buttonFont: Font = .body.weight(.medium)
+    var bodyFont: Font = .system(size: 15, weight: .regular)/*.body.weight(.regular)*/
+    var buttonFont: Font = .title3.weight(.medium)
     var dialogWidth: CGFloat = 320.00
     var buttonHeight: CGFloat = 50.0
     var buttonWidth: CGFloat = 140.0
-    var textToButtonSpacing: CGFloat = 10.0
+    var textToButtonSpacing: CGFloat = 15.0
     var cornerRadius: CGFloat = 32.0
-    var titleLeading: CGFloat = 3
-    var bodyLeading: CGFloat = 0
-    var titleDistanceFromTop: CGFloat = 20.0
-    var titleToBodySpacing: CGFloat = 6.0
-    var horizontalTextPadding: CGFloat = 32
+    var titleLeading: CGFloat = 4
+    var bodyLeading: CGFloat = 8
+    var titleDistanceFromTop: CGFloat = 25.0
+    var titleToBodySpacing: CGFloat = 15.0
+    var horizontalTextPadding: CGFloat = 30
     var buttonsHorizontal: Bool = true
     var buttonDialogHeight: CGFloat = 50
 }
@@ -108,7 +108,7 @@ struct sizeXL: NotificationSizes {
     var dialogHeight: CGFloat = 267.0
     var titleFont: Font = .system(size: 18.5, weight: .semibold)
     var bodyFont: Font = .subheadline.weight(.regular)
-    var buttonFont: Font = .system(size: 17.0, weight: .medium)
+    var buttonFont: Font = .system(size: 19.0, weight: .medium)
     var dialogWidth: CGFloat = 320.00
     var buttonHeight: CGFloat = 50.0
     var buttonWidth: CGFloat = 140.0
@@ -127,7 +127,7 @@ struct sizeXXL: NotificationSizes {
     var dialogHeight: CGFloat = 356.66
     var titleFont: Font = .system(size: 20.7, weight: .semibold)
     var bodyFont: Font = .subheadline.weight(.regular)
-    var buttonFont: Font = .subheadline.weight(.medium)
+    var buttonFont: Font = .body.weight(.medium)
     var dialogWidth: CGFloat = 320.0
     var buttonHeight: CGFloat = 50.0
     var buttonWidth: CGFloat = 144.0
