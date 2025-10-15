@@ -1,9 +1,10 @@
+
 //
 //  iOS26NotificationsView.swift
 //  union-notifications
 //
 //  Created by Ben Sage on 9/23/25
-//
+//  Last edited by Rafi Kigner 10/15/25
 
 import SwiftUI
 
@@ -87,7 +88,7 @@ struct iOS26NotificationView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if ((dynamicTypeSize >= .xxxLarge && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
+            if ((dynamicTypeSize >= .accessibility1 && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
                 ScrollView(.vertical, showsIndicators: true) {
                     textContent
                         .frame(width: sizes.dialogWidth )
@@ -117,23 +118,47 @@ struct iOS26NotificationView: View {
                 .padding(.bottom, sizes.textToButtonSpacing)
                 .frame(width: sizes.dialogWidth)
             } else {
-                ScrollView(.vertical, showsIndicators: true) {
-                    
-                   // Divider()
-                    VStack(spacing: 8) {
-                        disabledButton
-                        enabledButton
+                //a1 is no scroll buttons
+                //a3 buttons start to scroll
+                if dynamicTypeSize > .accessibility1{
+                    ScrollView(.vertical, showsIndicators: true) {
+                        
+                       // Divider()
+                        VStack(spacing: 8) {
+                            disabledButton
+                            enabledButton
+                        }
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
+                        .frame(width: sizes.dialogWidth)
                     }
-                    .padding(.top, 15)
-                    .padding(.bottom, 15)
-                    .frame(width: sizes.dialogWidth)
+                    .frame(width: sizes.dialogWidth, height: sizes.buttonDialogHeight)
+                     .compositingGroup()
+                     .clipped()
+                     .onAppear {
+                         UIScrollView.appearance().bounces = false
+                     }
+                    
+                }else{
+                    VStack(){
+                       // Divider()
+                        VStack(spacing: 8) {
+                            disabledButton
+                            enabledButton
+                        }
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
+                        .frame(width: sizes.dialogWidth)
+                    }
+                    .frame(width: sizes.dialogWidth, height: sizes.buttonDialogHeight)
+                     .compositingGroup()
+                     .clipped()
+                     .onAppear {
+                         UIScrollView.appearance().bounces = false
+                     }
+                        
                 }
-                .frame(width: sizes.dialogWidth, height: sizes.buttonDialogHeight)
-                 .compositingGroup()
-                 .clipped()
-                 .onAppear {
-                     UIScrollView.appearance().bounces = false
-                 }
+                
             }
             
         }
