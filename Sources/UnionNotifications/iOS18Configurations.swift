@@ -140,124 +140,124 @@ struct configXXXL: configurations {
     var buttonDialogHeight: CGFloat = 92
 }
 
-struct configA1: configurations {
-    var dialogHeight: CGFloat = 457.0
-    var titleFont: Font = .system(size: 29, weight: .semibold)
-    var bodyFont: Font = .system(size: 23, weight: .regular)
+struct configA1: configurations { //THIS HAD A VERY DIFFERENT CONFIGURATION TILL STARTED TAKING LANGUAGES OUT...IF BUTTONS RESORT TO VERTICAL ORIENTATION SOEMETHINGS GLITCHY AGAIN
+    var dialogHeight: CGFloat = 320.0
+    var titleFont: Font = .system(size: 28, weight: .semibold)
+    var bodyFont: Font = .system(size: 22, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.0
-    var buttonHeight: CGFloat = 74
+    var dialogWidth: CGFloat = 367.3
+    var buttonHeight: CGFloat = 66
     var cornerRadius: CGFloat = 18.0
-    var titleLeading: CGFloat = 4
-    var bodyLeading: CGFloat = 5
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 0
-    var horizontalTextPadding: CGFloat = 30
-    var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 155
+    var horizontalTextPadding: CGFloat = 26
+    var buttonsHorizontal: Bool = true
+    var buttonDialogHeight: CGFloat = 66
 }
 
 struct configA1H: configurations {
-    var dialogHeight: CGFloat = 351.0
-    var titleFont: Font = .body.weight(.semibold)
+    var dialogHeight: CGFloat = 320.0
+    var titleFont: Font = .system(size: 28, weight: .semibold)
     var bodyFont: Font = .system(size: 23, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 326.3
-    var buttonHeight: CGFloat = 70
+    var dialogWidth: CGFloat = 376.3
+    var buttonHeight: CGFloat = 66
     var cornerRadius: CGFloat = 18.0
-    var titleLeading: CGFloat = 1
-    var bodyLeading: CGFloat = 3
-    var titleDistanceFromTop: CGFloat = 0
-    var horizontalTextPadding: CGFloat = 35
-    var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 448/3
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    var titleDistanceFromTop: CGFloat = 25
+    var horizontalTextPadding: CGFloat = 26
+    var buttonsHorizontal: Bool = true
+    var buttonDialogHeight: CGFloat = 66
 }
 
 struct configA2: configurations {
-    var dialogHeight: CGFloat = 533
+    var dialogHeight: CGFloat = 484.33
     var titleFont: Font = .system(size: 32 , weight: .semibold)
     var bodyFont: Font = .system(size: 26, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.666667
+    var dialogWidth: CGFloat = 366.666667
     var buttonHeight: CGFloat = 87
     var cornerRadius: CGFloat = 18.0
-    var titleLeading: CGFloat = 5
-    var bodyLeading: CGFloat = 4
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 0
-    var horizontalTextPadding: CGFloat = 18
+    var horizontalTextPadding: CGFloat = 37
     var buttonsHorizontal: Bool = false
     var buttonDialogHeight: CGFloat = 175
 }
 
 struct configA2H: configurations {
-    var dialogHeight: CGFloat = 351.0
+    var dialogHeight: CGFloat = 393.0
     var titleFont: Font = .system(size: 32 , weight: .semibold)
     var bodyFont: Font = .system(size: 26, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 325.666667
-    var buttonHeight: CGFloat = 82
+    var dialogWidth: CGFloat = 365.666667
+    var buttonHeight: CGFloat = 70
     var cornerRadius: CGFloat = 18.0
-    var titleLeading: CGFloat = 3.2
-    var bodyLeading: CGFloat = 2
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 3
-    var horizontalTextPadding: CGFloat = 18
+    var horizontalTextPadding: CGFloat = 37
     var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 178
+    var buttonDialogHeight: CGFloat = 161
 }
 
 struct configA3: configurations {
-    var dialogHeight: CGFloat = 720.6667
-    var titleFont: Font = .system(size: 44 , weight: .semibold)
+    var dialogHeight: CGFloat = 666.67
+    var titleFont: Font = .system(size: 39 , weight: .semibold)
     var bodyFont: Font = .system(size: 33, weight: .regular)
-    var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.666667
-    var buttonHeight: CGFloat = 107
+    var buttonFont: Font = .body.weight(.medium)
+    var dialogWidth: CGFloat = 365.666667
+    var buttonHeight: CGFloat = 96
     var cornerRadius: CGFloat = 18.0
-    var titleLeading: CGFloat = 4
-    var bodyLeading: CGFloat = 5
-    var titleDistanceFromTop: CGFloat = 1
-    var horizontalTextPadding: CGFloat = 30
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
+    var titleDistanceFromTop: CGFloat = 0
+    var horizontalTextPadding: CGFloat = 22
     var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 216
+    var buttonDialogHeight: CGFloat = 195
 }
 
 struct configA3H: configurations {
-    var dialogHeight: CGFloat = 351.666667
-    var titleFont: Font = .body.weight(.semibold)
-    var bodyFont: Font = .subheadline.weight(.regular)
+    var dialogHeight: CGFloat = 393.666667
+    var titleFont: Font = .system(size: 39 , weight: .semibold)
+    var bodyFont: Font = .system(size: 33, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.666667
-    var buttonHeight: CGFloat = 106
+    var dialogWidth: CGFloat = 366.666667
+    var buttonHeight: CGFloat = 96
     var cornerRadius: CGFloat = 18.0
     var titleLeading: CGFloat = 0
     var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 5
     var horizontalTextPadding: CGFloat = 23
     var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 175
+    var buttonDialogHeight: CGFloat = 190
 }
 
 struct configA4: configurations {
-    var dialogHeight: CGFloat = 720.6667
-    var titleFont: Font = .system(size: 46 , weight: .semibold)
-    var bodyFont: Font = .system(size: 38, weight: .regular)
+    var dialogHeight: CGFloat = 783.6667
+    var titleFont: Font = .system(size: 45 , weight: .semibold)
+    var bodyFont: Font = .system(size: 37, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.666667
-    var buttonHeight: CGFloat = 122
+    var dialogWidth: CGFloat = 366.666667
+    var buttonHeight: CGFloat = 112
     var cornerRadius: CGFloat = 18.0
-    var titleLeading: CGFloat = 3
-    var bodyLeading: CGFloat = 3
+    var titleLeading: CGFloat = 0
+    var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 15
-    var horizontalTextPadding: CGFloat = 12
+    var horizontalTextPadding: CGFloat = 30
     var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 244
+    var buttonDialogHeight: CGFloat = 230
 }
 
 struct configA4H: configurations {
-    var dialogHeight: CGFloat = 351.666667
+    var dialogHeight: CGFloat = 395.666667
     var titleFont: Font = .body.weight(.semibold)
     var bodyFont: Font = .subheadline.weight(.regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.666667
+    var dialogWidth: CGFloat = 366.666667
     var buttonHeight: CGFloat = 106
     var cornerRadius: CGFloat = 18.0
     var titleLeading: CGFloat = 0
@@ -269,33 +269,33 @@ struct configA4H: configurations {
 }
 
 struct configA5: configurations {
-    var dialogHeight: CGFloat = 720.6667
-    var titleFont: Font = .title3.weight(.semibold)
-    var bodyFont: Font = .system(size: 50, weight: .regular)
+    var dialogHeight: CGFloat = 787.6667
+    var titleFont: Font = .body.weight(.semibold)
+    var bodyFont: Font = .system(size: 46, weight: .regular)
     var buttonFont: Font = .body.weight(.regular)
-    var dialogWidth: CGFloat = 327.666667
-    var buttonHeight: CGFloat = 137
+    var dialogWidth: CGFloat = 363.666667
+    var buttonHeight: CGFloat = 125
     var cornerRadius: CGFloat = 18.0
     var titleLeading: CGFloat = 0
     var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 10
-    var horizontalTextPadding: CGFloat = 40
+    var horizontalTextPadding: CGFloat = 10
     var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 274
+    var buttonDialogHeight: CGFloat = 250
 }
 
 struct configA5H: configurations {
-    var dialogHeight: CGFloat = 351.666667
+    var dialogHeight: CGFloat = 393.666667
     var titleFont: Font = .subheadline.weight(.semibold)
     var bodyFont: Font = .caption.weight(.regular)
     var buttonFont: Font = .body.weight(.medium)
-    var dialogWidth: CGFloat = 327.666667
-    var buttonHeight: CGFloat = 137
+    var dialogWidth: CGFloat = 366.666667
+    var buttonHeight: CGFloat = 125
     var cornerRadius: CGFloat = 18.0
     var titleLeading: CGFloat = 0
     var bodyLeading: CGFloat = 0
     var titleDistanceFromTop: CGFloat = 10
-    var horizontalTextPadding: CGFloat = 40
+    var horizontalTextPadding: CGFloat = 10
     var buttonsHorizontal: Bool = false
-    var buttonDialogHeight: CGFloat = 177
+    var buttonDialogHeight: CGFloat = 195
 }

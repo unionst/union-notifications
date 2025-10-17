@@ -81,7 +81,7 @@ struct iOS18NotificationView: View {
     var body: some View {
         
         VStack(spacing: 0) {
-            if ((dynamicTypeSize > .xxxLarge && isLandscape) || (dynamicTypeSize >= .accessibility3 && !isLandscape )){
+            if ((dynamicTypeSize > .xxxLarge && isLandscape) || (dynamicTypeSize > .accessibility3 && !isLandscape )){
                 ScrollView(.vertical, showsIndicators: true) {
                     content
                         .frame(width: configs.dialogWidth)
@@ -104,7 +104,7 @@ struct iOS18NotificationView: View {
                     allowButton
                 }
                 .frame(width: configs.dialogWidth, height: configs.buttonDialogHeight)
-            } else if (dynamicTypeSize >=  .accessibility3) && isLandscape || (dynamicTypeSize >  .accessibility5 && !isLandscape) {
+            } else if (dynamicTypeSize >  .accessibility3) && isLandscape || (dynamicTypeSize >  .accessibility5 && !isLandscape) {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 0) {
                         dontAllowButton
