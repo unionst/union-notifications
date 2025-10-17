@@ -87,9 +87,10 @@ struct sizeM: NotificationSizes {
     var buttonDialogHeight: CGFloat = 70
 }
 
-struct sizeL: NotificationSizes { //default
-    var dialogHeight: CGFloat = 223.0
-    var titleFont: Font = .system(size: 17.0, weight: .semibold)
+struct sizeL: NotificationSizes { //default  960 X 672
+    var dialogHeight: CGFloat = 214.0
+    var titleFont: Font = .headline.weight(.semibold)
+//    var titleFont: Font = .system(size: 17.0, weight: .semibold)
     var bodyFont: Font = .subheadline.weight(.regular)
     var buttonFont: Font = .system(size: 17.0, weight: .medium)
     var dialogWidth: CGFloat = 320.00
@@ -97,10 +98,10 @@ struct sizeL: NotificationSizes { //default
     var buttonWidth: CGFloat = 140.0
     var textToButtonSpacing: CGFloat = 19.0
     var cornerRadius: CGFloat = 32.0
-    var titleLeading: CGFloat = 4.0
+    var titleLeading: CGFloat = 0.0
     var bodyLeading: CGFloat = 0
-    var titleDistanceFromTop: CGFloat = 32.0
-    var titleToBodySpacing: CGFloat = 9.0
+    var titleDistanceFromTop: CGFloat = 26.0
+    var titleToBodySpacing: CGFloat = 7.5
     var horizontalTextPadding: CGFloat = 30
     var buttonsHorizontal: Bool = true
     var buttonDialogHeight: CGFloat = 70
