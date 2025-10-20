@@ -1,0 +1,9 @@
+
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = ""%@" ต้องการที่จะส่งการแจ้งเตือนให้คุณ";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "การแจ้งเตือนอาจรวมถึงการเตือน เสียง และป้ายกำกับไอคอน คุณสามารถกำหนดค่าการแจ้งเตือนเหล่านี้ได้ในการตั้งค่า";
+"Allow" = "อนุญาต";
+"Don't Allow" = "ไม่อนุญาต";
+/* Test View */
+"Notification Permission Dialog Test" = "การทดสอบกล่องโต้ตอบการอนุญาตการแจ้งเตือน";
+"Show Notification Dialog" = "แสดงกล่องโต้ตอบการแจ้งเตือน";

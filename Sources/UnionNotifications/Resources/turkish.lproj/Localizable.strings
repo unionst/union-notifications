@@ -1,0 +1,6 @@
+
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = ""%@" Size Bildirimler Göndermek İstiyor";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Bildirimler arasında uyarılar, sesler ve işaretler olabilir. Bunlar, Ayarlar'da ayarlanabilir.";
+"Allow" = "İzin Ver";
+"Don't Allow" = "İzin Verme";

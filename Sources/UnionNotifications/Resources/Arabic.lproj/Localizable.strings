@@ -1,0 +1,5 @@
+/* Notification Permission Dialog */
+"\"%@\" Would Like to Send You Notifications" = "يود "%@" إرسال الإشعارات إليك";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "يمكن أن تتضمن الإشعارات تنبيهات وأصوات وشارات على الأيقونة. يمكن تكوين ذلك في الإعدادات.";
+"Allow" = "السماح";
+"Don't Allow" = "عدم السماح";

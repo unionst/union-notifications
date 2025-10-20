@@ -1,11 +1,8 @@
 /* Notification Permission Dialog */
-"notification.permission.title" = "PLACEHOLDER";
-"notification.permission.message" = "PLACEHOLDER";
-"notification.permission.allow" = "PLACEHOLDER";
-"notification.permission.dontAllow" = "PLACEHOLDER";
-"notification.permission.enable" = "PLACEHOLDER";
-"notification.permission.subtitle" = "PLACEHOLDER";
-
+"\"%@\" Would Like to Send You Notifications" = "Autorisez-vous « %@ » à vous envoyer des notifications ?";
+"Notifications may include alerts, sounds, and icon badges. These can be configured in Settings." = "Les notifications peuvent inclure des alertes, des sons et des pastilles d'icônes. Vous pouvez les configurer dans Réglages.";
+"Allow" = "Autoriser";
+"Don't Allow" = "Refuser";
 /* Test View */
-"notification.test.title" = "PLACEHOLDER";
-"notification.test.button" = "PLACEHOLDER";
+"Notification Permission Dialog Test" = "Test de dialogue d'autorisation de notification";
+"Show Notification Dialog" = "Afficher le dialogue de notification";
