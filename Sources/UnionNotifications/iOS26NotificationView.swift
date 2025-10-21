@@ -11,6 +11,7 @@ import SwiftUI
 struct iOS26NotificationView: View {
     let appName: String
     let onAllow: () -> Void
+    let onDeny: () -> Void
     @Namespace private var glassNamespace
     
     private var localizedTitle: String {
@@ -37,16 +38,15 @@ struct iOS26NotificationView: View {
 
                 HStack(spacing: 8) {
                     Button {
-                        // Don't Allow action - no-op
+                        onDeny()
                     } label: {
-                        Text("Don't Allow", bundle: .module)
+                        Text("Don’t Allow", bundle: .module)
                             .font(.body.weight(.medium))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity)
                             .frame(height: 34)
                     }
                     .buttonStyle(.glass)
-                    .disabled(true)
 
                     Button {
                         onAllow()
@@ -73,6 +73,8 @@ struct iOS26NotificationView: View {
     if #available(iOS 26, *) {
         iOS26NotificationView(appName: "TestApp") {
             print("Allow tapped")
+        } onDeny: {
+            print("Deny tapped")
         }
     } else {
         // Fallback on earlier versions

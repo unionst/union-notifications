@@ -11,6 +11,7 @@ import UnionButtons
 struct iOS18NotificationView: View {
     let appName: String
     let onAllow: () -> Void
+    let onDeny: () -> Void
     
     private var localizedTitle: String {
         String(format: String(localized: "\"%@\" Would Like to Send You Notifications", bundle: .module), appName)
@@ -40,10 +41,23 @@ struct iOS18NotificationView: View {
                 Divider()
 
                 HStack(spacing: 0) {
-                    Text("Don't Allow", bundle: .module)
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundStyle(Color.blue.opacity(0.3))
-                        .frame(maxWidth: .infinity, minHeight: 44)
+                    Button {
+                        onDeny()
+                    } label: {
+                        Text("Don’t Allow", bundle: .module)
+                            .font(.system(size: 17, weight: .regular))
+                            .foregroundStyle(Color.blue.opacity(0.3))
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                    .contentShape(.rect)
+                    .buttonStyle(UnionButtonStyle(nil) { label, isPressed in
+                        label
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(
+                                Rectangle()
+                                    .fill(Color.primary.opacity(isPressed ? 0.1 : 0))
+                            )
+                    })
 
                     Divider()
 
@@ -80,5 +94,7 @@ struct iOS18NotificationView: View {
 #Preview {
     iOS18NotificationView(appName: "TestApp") {
         print("Allow tapped")
+    } onDeny: {
+        print("Deny tapped")
     }
 }

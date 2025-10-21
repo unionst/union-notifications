@@ -1,0 +1,24 @@
+{
+  "originHash" : "d506ce6d7c590f7036a4d362f3a9bc78262b86c0e79263ee9722f18803a2ca35",
+  "pins" : [
+    {
+      "identity" : "union-buttons",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/unionst/union-buttons",
+      "state" : {
+        "revision" : "28b3d5dc481b094c3bcce0788721a3f90f4cda80",
+        "version" : "2.1.8"
+      }
+    },
+    {
+      "identity" : "union-haptics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/unionst/union-haptics.git",
+      "state" : {
+        "revision" : "801d067446ad0056b8369b812aca8a97b7723bb2",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -33,6 +33,9 @@ public struct NotificationTestView: View {
                 NotificationsView {
                     print("User allowed notifications")
                     showingDialog = false
+                } onDeny: {
+                    print("User denied notifications")
+                    showingDialog = false
                 }
                 .transition(.opacity.combined(with: .scale(scale: 0.8)))
                 .animation(.easeInOut(duration: 0.2), value: showingDialog)
