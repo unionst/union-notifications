@@ -40,6 +40,16 @@ public struct NotificationsView: View {
         }
     }
     
+    private func handleDeny() {
+        if requestSystemPermission {
+            Task {
+                await requestNotificationPermission()
+            }
+        } else {
+            onDeny?()
+        }
+    }
+    
     @MainActor
     private func requestNotificationPermission() async {
         let granted = try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
@@ -48,10 +58,6 @@ public struct NotificationsView: View {
             return
         }
         
-        handleDeny()
-    }
-
-    private func handleDeny() {
         onDeny?()
     }
 }
